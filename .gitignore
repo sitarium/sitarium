@@ -1,0 +1,9 @@
+/vendor
+/storage
+.env
+
+.project
+.buildpath
+/.settings
+
+/public/.ovhconfig
