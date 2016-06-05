@@ -1,9 +1,11 @@
 /vendor
 /storage
 .env
+.env.local
+.composer.lock
 
+/.settings
 .project
 .buildpath
-/.settings
 
 /public/.ovhconfig
