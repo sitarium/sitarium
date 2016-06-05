@@ -13,11 +13,11 @@ Sitarium is built on the beautiful Laravel framework and has only few requiremen
 
 ### Step 1: Deploy Sitarium source code
 
-Easy task: simply extract Sitarium source in the dedicated place of your webserver. The /public folder needs to be set as the Document Root.
+Easy task: simply extract Sitarium source in the dedicated place of your webserver. The `/public` folder needs to be set as the Document Root.
 
 ### Step 2: Set up the database
 
-Provide the database connection details in the /config/database.php file (driver, server, login, password, database name...)
+Provide the database connection details in the `/config/database.php` file (driver, server, login, password, database name...)
 
 Sitarium requires only a few tables to work with. Instead of creating everything manually, you only have to run a simple command from the place you put Sitarium source code.
 php artisan migrate
@@ -32,13 +32,13 @@ Sitarium can host almost any web template and transform it into a live editable 
 
 ### Step 1: Deploy your website
 
-Create a new folder for your website in the /public/websites directory.
+Create a new folder for your website in the `/public/websites` directory.
 
 You can also create a symbolic link to the website folder located anywhere.
 
 ### Step 2: rename the HTML files to make them compatible with Blade templating system
 
-Sounds complex? Not at all! All you need to do is to rename the .htm or .html extension by .blade.php and that's it!
+Sounds complex? Not at all! All you need to do is to rename the `.htm` or `.html` extension by `.blade.php` and that's it!
 
 If you're interested, you can find [more info about Blade templating system](https://laravel.com/docs/5.2/blade)
 
@@ -46,9 +46,9 @@ If you're interested, you can find [more info about Blade templating system](htt
 
 You have a header that is repeated on several pages? To allow the updates to be done on all the pages at once, you just need to extract this part in a dedicated file.
 
-Create a file named _header.blade.php, insert inside it the common HTML code.
+Create a file named `_header.blade.php`, insert inside it the common HTML code.
 
-In the files that use the header, replace this common HTML code by a simple tag <include data-source="header" /> and you're done!
+In the files that use the header, replace this common HTML code by a simple tag `<include data-source="header" />` and you're done!
 
 NB: the underscore before the file name for the common code is important to distinguish extracts of code and complete standalone pages.
 
@@ -56,21 +56,21 @@ NB: the underscore before the file name for the common code is important to dist
 
 This is the fun part: define where to enable Sitarium powerful features. All you need to do is to add special css classes.
 
-#### .sitarium_editable
+#### `.sitarium_editable`
 
-Applies to blocks of text (div, span, p...) or images (img).
+Applies to blocks of text (`div`, `span`, `p`...) or images (`img`).
 
 Enables the live editing features.
 
-#### .sitarium_repeatable
+#### `.sitarium_repeatable`
 
-Applies to lists of elements (div, ul...).
+Applies to lists of elements (`div`, `ul`...).
 
-Enables the duplicating / suppressing features.
+Enables the duplicating and suppressing features.
 
-#### .sitarium_connection_link and .sitarium_disconnection_link
+#### `.sitarium_connection_lin` and `.sitarium_disconnection_link`
 
-Applies preferably to links (a).
+Applies preferably to links (`a`).
 
 Triggers the login or logout forms.
 
