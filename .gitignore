@@ -2,7 +2,7 @@
 /storage
 .env
 .env.local
-.composer.lock
+composer.lock
 
 /.settings
 .project
