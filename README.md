@@ -15,6 +15,8 @@ Sitarium is built on the beautiful Laravel framework and has only few requiremen
 
 Easy task: simply extract Sitarium source in the dedicated place of your webserver. The `/public` folder needs to be set as the Document Root.
 
+Run the command `composer update` to download all the dependencies.
+
 ### Step 2: Set up the database
 
 Provide the database connection details in the `/config/database.php` file (driver, server, login, password, database name...)
