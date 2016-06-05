@@ -9,18 +9,20 @@ DirectorySlash Off
 
     RewriteEngine On
 
-    ######
+    ##################
+    #                #
+    # SITARIUM RULES #
+    #                #
+    ##################
     #
-    # SITARIUM ADD-ON
-    #
-    ######
-    #
-	# Redirect static resources (css, images and js)
-	RewriteCond $1 ^(assets|css|files|fonts|images|img|js|robots.txt|sitemap.xml)
+	# Redirect hosted website specific resources, except php files and files with . or _
+	RewriteCond %{DOCUMENT_ROOT}/websites/%{HTTP_HOST}%{REQUEST_URI} -f
+	RewriteCond %{THE_REQUEST} !\s/+(.+?)\.php[\s?] [NC]
+	RewriteCond %{THE_REQUEST} !(^\.|/\.|\_|/\_)
 	RewriteRule ^(.*)$ /websites/%{HTTP_HOST}/$1 [L]    
     #
     #
-    ######
+    ##################
 
     # Redirect Trailing Slashes If Not A Folder...
     RewriteCond %{REQUEST_FILENAME} !-d
