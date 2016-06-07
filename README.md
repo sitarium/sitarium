@@ -7,7 +7,7 @@ Sitarium targets web designers and web developers that want to go straight to th
 ## Installing Sitarium platform
 
 Sitarium is built on the beautiful Laravel framework and has only few requirements: 
-- PHP 5.4+ (PHP 7 recommended)
+- PHP 5.5.9+ (PHP 7 recommended)
 - A database (MySQL recommended)
 - Command line access to the web server to run Artisan commands (even though using WebArtisan package can be a workaround) 
 

@@ -7,7 +7,7 @@
     "require": {
         "php": ">=5.5.9",
         "laravel/framework": "5.2.*",
-		"wa72/htmlpagedom": "~1.0",
+		"wa72/htmlpagedom": "~1.2",
         "caouecs/laravel-lang": "~3.0"
     },
     "require-dev": {
