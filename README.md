@@ -70,7 +70,7 @@ Applies to lists of elements (`div`, `ul`...).
 
 Enables the duplicating and suppressing features.
 
-#### `.sitarium_connection_lin` and `.sitarium_disconnection_link`
+#### *COMING SOON* `.sitarium_connection_link` and `.sitarium_disconnection_link`
 
 Applies preferably to links (`a`).
 
