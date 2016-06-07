@@ -1,7 +1,0 @@
-{
-	"name": "sitarium/sitarium",
-	"description": " Sitarium makes hosting and live-editing websites easy.",
-	"require": {
-        "php": ">=5.5.9"
-    }
-}
