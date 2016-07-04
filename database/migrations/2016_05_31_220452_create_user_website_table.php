@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateWebsiteUserTable extends Migration {
+class CreateUserWebsiteTable extends Migration {
 
 	/**
 	 * Run the migrations.
@@ -14,19 +14,19 @@ class CreateWebsiteUserTable extends Migration {
 	{
 		DB::transaction(function()
 		{
-			Schema::create('website_user', function(Blueprint $table)
+			Schema::create('user_website', function(Blueprint $table)
 			{
 				$table->increments('id');
-				$table->integer('website_id')->unsigned();
 				$table->integer('user_id')->unsigned();
+				$table->integer('website_id')->unsigned();
 			});
 	
-			Schema::table('website_user', function(Blueprint $table)
+			Schema::table('user_website', function(Blueprint $table)
 			{
-				$table->foreign('website_id')->references('id')->on('websites');
 				$table->foreign('user_id')->references('id')->on('users');
+				$table->foreign('website_id')->references('id')->on('websites');
 				//
-				$table->unique(array('website_id', 'user_id'));
+				$table->unique(['user_id', 'website_id']);
 			});
 		});
 	}
@@ -40,7 +40,7 @@ class CreateWebsiteUserTable extends Migration {
 	{
 		DB::transaction(function()
 		{
-			Schema::drop('website_user');
+			Schema::drop('user_website');
 		});
 	}
 

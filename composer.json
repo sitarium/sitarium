@@ -8,7 +8,11 @@
         "php": ">=5.5.9",
         "laravel/framework": "5.2.*",
 		"wa72/htmlpagedom": "~1.2",
-        "caouecs/laravel-lang": "~3.0"
+        "caouecs/laravel-lang": "~3.0",
+        "orchestra/asset": "~3.0",
+        "components/jquery": "2.2.*",
+        "components/bootstrap": "3.3.*",
+        "jungle-gecko/ajax-form": "1.0.*"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
@@ -38,11 +42,14 @@
         ],
         "post-install-cmd": [
             "Illuminate\\Foundation\\ComposerScripts::postInstall",
-            "php artisan optimize"
+            "php artisan optimize",
+            "php artisan vendor:publish --provider=\"App\\Providers\\AppServiceProvider\" --tag=\"assets\" --force"
         ],
         "post-update-cmd": [
             "Illuminate\\Foundation\\ComposerScripts::postUpdate",
-            "php artisan optimize"
+            "php artisan optimize",
+            "php artisan vendor:publish --provider=\"App\\Providers\\AppServiceProvider\" --tag=\"assets\" --force",
+            "php artisan view:clear"
         ]
     },
     "config": {

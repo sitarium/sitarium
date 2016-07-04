@@ -12,7 +12,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'email', 'password', 'admin',
     ];
 
     /**
@@ -23,6 +23,15 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+    
+    /**
+     * The attributes that should be casted to native types.
+     *
+     * @var array
+     */
+    protected $casts = [
+        'admin' => 'boolean',
+    ];
 
     public function websites()
     {
@@ -31,18 +40,6 @@ class User extends Authenticatable
     
     public function isAuthorizedOnWebsite($website)
     {
-        $is_authorized = false;
-        /*
-         * TODO refactor using Collection
-         */
-        foreach ($this->websites as $authorized_site)
-        {
-            if ($authorized_website->name === $website->name)
-            {
-                $is_authorized = true;
-                break;
-            }
-        }
-        return $is_authorized;
+        return collect($this->websites)->contains('name', $website->name);
     }
 }

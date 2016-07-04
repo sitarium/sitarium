@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use App\Helpers\FileHelper;
+use Log;
 
 class Website extends Model
 {
@@ -68,32 +69,30 @@ class Website extends Model
 
     public function getIncludeFiles()
     {
-        $files = glob($this->websites_folder . '/' . $this->host . '/[_]*[.blade.php]');
-        $include_files = array();
-        foreach ($files as $file) {
-            $include_files[substr(strrchr($file, '/'), 2, - 10)] = $file;
-        }
-        return $include_files;
+        return 
+            collect(glob($this->websites_folder . '/' . $this->host . '/[_]*[.blade.php]'))
+            ->keyBy(function ($item) {
+                return substr(strrchr($item, '/'), 2, - 10);
+            })
+            ->toArray();
     }
 
     public function getEditableFiles()
     {
-        /*
-         * TODO order by name
-         */
-        $files = glob($this->websites_folder . '/' . $this->host . '/[!_]*[.blade.php]');
-        $editable_files = array();
-        foreach ($files as $file) {
-            // Filtering folders
-            if (is_file($file)) {
-                $filename = substr(strrchr($file, '/'), 1, - 10);
-                $editable_files[$filename] = array(
-                    'name' => $filename,
-                    'date' => date('d/m/Y H:i', filemtime($file))
-                );
-            }
-        }
-        return $editable_files;
+        return 
+            collect(glob($this->websites_folder . '/' . $this->host . '/[!_]*[.blade.php]'))
+            ->filter(function($item, $key) {
+                return is_file($item);
+            })
+            ->map(function ($item, $key) {
+                return [
+                    'name' => substr(strrchr($item, '/'), 1, - 10),
+                    'date' => date('d/m/Y H:i', filemtime($item))
+                ];
+            })
+            ->keyBy('name')
+            ->sortBy('name')
+            ->toArray();
     }
 
     public function savePage($page, $content)
@@ -125,20 +124,24 @@ class Website extends Model
 
     public function getBackups()
     {
-        $files = glob($this->websites_folder . '/' . $this->host . '/' . $this->backups_folder . '/[!_]*');
-        usort($files, create_function('$a, $b', 'return filemtime($a) - filemtime($b);'));
-        $backups = array();
-        foreach ($files as $file) {
-            // Filtering files
-            if (is_dir($file)) {
-                $filename = substr(strrchr($file, '/'), 1);
-                $backups[$filename] = array(
-                    'name' => $filename,
-                    'date' => date('d/m/Y H:i', filemtime($file))
-                );
-            }
-        }
-        return $backups;
+        return 
+            collect(glob($this->websites_folder . '/' . $this->host . '/' . $this->backups_folder . '/[!_]*'))
+            ->sort(function ($a, $b) {
+                return filemtime($a) - filemtime($b);
+            })
+            ->filter(function($item, $key) {
+                return is_file($item);
+            })
+            ->map(function ($item, $key) {
+                return [
+                    'name' => substr(strrchr($item, '/'), 1),
+                    'date' => date('d/m/Y H:i', filemtime($item))
+                ];
+            })
+            ->keyBy('name')
+            ->sortBy('name')
+            ->toArray();
+        
     }
 
     public function makeBackup($backup_name)

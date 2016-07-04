@@ -1,0 +1,210 @@
+@import '../bootstrap/css/custom-bootstrap.css';
+
+@font-face {
+    font-family: 'sonsie_oneregular';
+    src: url('../fonts/sonsie/sonsieone-regular-webfont.eot');
+    src: url('../fonts/sonsie/sonsieone-regular-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/sonsie/sonsieone-regular-webfont.woff2') format('woff2'),
+         url('../fonts/sonsie/sonsieone-regular-webfont.woff') format('woff'),
+         url('../fonts/sonsie/sonsieone-regular-webfont.ttf') format('truetype'),
+         url('../fonts/sonsie/sonsieone-regular-webfont.svg#sonsie_oneregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'exo2';
+    src: url('../fonts/exo2/Exo2.0-Regular-webfont.eot');
+    src: url('../fonts/exo2/Exo2.0-Regular-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/exo2/Exo2.0-Regular-webfont.woff') format('woff'),
+         url('../fonts/exo2/Exo2.0-Regular-webfont.ttf') format('truetype'),
+         url('../fonts/exo2/Exo2.0-Regular-webfont.svg#exo2') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+.fly-editor {
+	font-family: exo2,"Helvetica Neue",Helvetica,Arial,sans-serif;
+/* 	font-size: 14px; */
+}
+
+.fly-editor .close span {
+	font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+}
+
+.fly-editor .main_container {
+	pointer-events: none;
+	text-align: left;
+	color: #333;
+	position: absolute;
+	top: -10000px;
+	left: -10000px;
+	background-color: transparent;
+}
+
+.fly-editor .btn,
+.fly-editor .btn:focus {
+	margin: 5px 0 0 0;
+}
+
+.fly-editor .container-fluid {
+	padding: 0;
+}
+
+.fly-editor .modal {
+	pointer-events: auto;
+	z-index: 1110;
+} 
+
+.fly-editor .navbar {
+	pointer-events: auto;
+} 
+
+.fly-editor .navbar-brand {
+	font-family: sonsie_oneregular, exo2, "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+.fly-editor form {
+	border: none;
+	background-color: inherit;
+}
+
+/* .fly-editor form .ajax-form_valid_box, */
+/* .fly-editor form .ajax-form_error_box { */
+/* 	margin-top: 15px; */
+/* } */
+
+/* .fly-editor form .ajax-form_valid_box .alert, */
+/* .fly-editor form .ajax-form_error_box .alert { */
+/* 	margin-bottom: 5px; */
+/* } */
+
+.fly-editor .table {
+	margin: 0;
+	width: 100%;
+}
+
+.fly-editor .table * {
+}
+
+.fly-editor img {
+	margin: 0;
+	padding: 0;
+	border: 0;
+}
+
+.fly-editor .dropzone .float-button {
+	float: right;
+	margin: 10px;
+	z-index: 3;
+}
+
+/* Wrapper */
+@-moz-keyframes .fly-editor wrapper { 0% { opacity: 0; } 100% { opacity: 1; } }
+@-webkit-keyframes .fly-editor wrapper { 0% { opacity: 0; } 100% { opacity: 1; } }
+@-o-keyframes .fly-editor wrapper { 0% { opacity: 0; } 100% { opacity: 1; } }
+@-ms-keyframes .fly-editor wrapper { 0% { opacity: 0; } 100% { opacity: 1; } }
+@keyframes .fly-editor wrapper { 0% { opacity: 0; } 100% { opacity: 1; } }
+
+.fly-editor_original {
+	border-style: solid; 
+	border-width: 2px; 
+	-moz-border-image: url(../images/border-original.png) 8 repeat; 
+	-webkit-border-image: url(../images/border-original.png) 8 repeat; 
+	-o-border-image: url(../images/border-original.png) 8 repeat; 
+	border-image: url(../images/border-original.png) 8 repeat;
+	transition: opacity 1s
+}
+
+
+.fly-editor_updated {
+	border-style: solid; 
+	border-width: 2px; 
+	-moz-border-image: url(../images/border-updated.png) 8 repeat; 
+	-webkit-border-image: url(../images/border-updated.png) 8 repeat; 
+	-o-border-image: url(../images/border-updated.png) 8 repeat; 
+	border-image: url(../images/border-updated.png) 8 repeat;
+}
+
+.fly-editor_frame {
+	-moz-animation: wrapper 1s forwards;
+	-webkit-animation: wrapper 1s forwards;
+	-o-animation: wrapper 1s forwards;
+	-ms-animation: wrapper 1s forwards;
+	animation: wrapper 1s forwards;
+	
+	pointer-events: none;
+	z-index: 10;
+	vertical-align: top;
+	text-align: right;
+	box-sizing: content-box;
+}
+
+.fly-editor_frame [draggable], .fly-editor_frame[draggable] {
+    -moz-user-select: none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+    user-select: none;
+}
+
+.fly-editor_frame button {
+	pointer-events: auto;
+	content: " ";
+}
+
+.fly-editor_undo {
+	transform: scale(-1, 1);
+}
+
+/******
+NAVBAR
+******/
+
+#fly-editor_navbar {
+	height: 0;
+	min-height: 0;
+	background-color: rgba(248, 248, 248, .75);
+	z-index: 1100;
+}
+
+.fly-editor_dialog-container {
+	z-index: 1110;
+}
+
+.fly-editor .modal-dialog {
+	left: auto;
+}
+
+.fly-editor .container-fluid > .navbar-header {
+	padding-left: 15px;
+	padding-right: 15px;
+}
+
+.fly-editor .navbar-btn,
+.fly-editor .navbar-btn:focus {
+	margin-top: 8px;
+	margin-bottom: 8px;
+}
+
+.fly-editor .navbar-default .navbar-collapse {
+	border-bottom: 1px solid #e7e7e7;
+	background-color: rgba(248, 248, 248, .75);
+}
+
+.fly-editor .navbar-element {
+	display: inline;
+}
+
+.fly-editor .navbar-element:last-child {
+	padding-right:15px;
+	margin-right: 0;
+}
+
+@media (max-width: 767px) {
+	.fly-editor .navbar-element {
+		display: block;
+		margin-left: 30px;
+		margin-right: 30px;
+	}
+}
+

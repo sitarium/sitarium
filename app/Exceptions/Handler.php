@@ -3,6 +3,7 @@
 namespace App\Exceptions;
 
 use Exception;
+use Lang;
 use Illuminate\Validation\ValidationException;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
@@ -45,6 +46,16 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $e)
     {
-        return parent::render($request, $e);
+        if ($e instanceof ValidationException && $e->getResponse()) {
+            $e->getResponse()->setData([
+                'code' => $e->getResponse()->getStatusCode(),
+                'message' => Lang::has('sitarium.validation_exception')
+                                ? Lang::get('sitarium.validation_exception')
+                                : 'Validation Exception!',
+                'errors' => $e->getResponse()->getData()
+            ]);
+        }
+
+		return parent::render($request, $e);
     }
 }

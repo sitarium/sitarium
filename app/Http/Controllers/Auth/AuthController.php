@@ -2,8 +2,13 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\User;
+use Auth;
+use Lang;
+use Request;
+use Response;
+use Session;
 use Validator;
+use App\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
@@ -29,6 +34,12 @@ class AuthController extends Controller
      * @var string
      */
     protected $redirectTo = '/';
+    
+    private $loginView = 'admin.login';
+    
+    private $registerView = 'admin.register';
+    
+    private $redirectPath = '/admin';
 
     /**
      * Create a new authentication controller instance.
@@ -46,14 +57,14 @@ class AuthController extends Controller
      * @param  array  $data
      * @return \Illuminate\Contracts\Validation\Validator
      */
-    protected function validator(array $data)
-    {
-        return Validator::make($data, [
-            'name' => 'required|max:255',
-            'email' => 'required|email|max:255|unique:users',
-            'password' => 'required|min:6|confirmed',
-        ]);
-    }
+//     protected function validator(array $data)
+//     {
+//         return Validator::make($data, [
+//             'name' => 'required|max:255',
+//             'email' => 'required|email|max:255|unique:users',
+//             'password' => 'required|min:6|confirmed',
+//         ]);
+//     }
 
     /**
      * Create a new user instance after a valid registration.
@@ -61,12 +72,71 @@ class AuthController extends Controller
      * @param  array  $data
      * @return User
      */
-    protected function create(array $data)
+//     protected function create(array $data)
+//     {
+//         return User::create([
+//             'name' => $data['name'],
+//             'email' => $data['email'],
+//             'password' => bcrypt($data['password']),
+//         ]);
+//     }
+
+    /**
+     * Get the failed login response instance.
+     *
+     * @param \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    protected function sendFailedLoginResponse(\Illuminate\Http\Request $request)
     {
-        return User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => bcrypt($data['password']),
-        ]);
+        if (Request::ajax())
+        {
+            return Response::json([
+                'code' => 403,
+                'message' => $this->getFailedLoginMessage()
+            ]);
+        }
+        
+        return redirect()->back()
+            ->withInput($request->only($this->loginUsername(), 'remember'))
+            ->withErrors([
+                $this->loginUsername() => $this->getFailedLoginMessage(),
+            ]);
+    }
+    
+    public function authenticated(\Illuminate\Http\Request $request)
+    {
+        if($request->route()->domain() == env('SITARIUM_ADMIN_WEBSITE') && Auth::user()->admin !== true ) 
+        {
+            Auth::logout();
+            if ($request->ajax() || $request->wantsJson())
+            {
+    			return Response::json([
+					'code' => 401,
+					'message' => Lang::has('sitarium.unauthorized_exception')
+                                    ? Lang::get('sitarium.unauthorized_exception')
+                                    : 'Unauthorized Exception!'
+    			], 401);
+            }
+            else
+            {
+                return redirect()->guest('login', 401);
+            }
+        }
+        
+        $intended_url = Session::pull('url.intended', $this->redirectPath);
+		
+        if (Request::ajax())
+        {
+			return Response::json([
+				'code' => 0,
+				'message' => Lang::has('sitarium.authentication_success')
+                                ? Lang::get('sitarium.authentication_success')
+                                : 'Authentication successful!',
+				'callback_vars' => ['redirect_url' => $intended_url]
+			]);
+        }
+        
+        return redirect()->intended($intended_url);
     }
 }

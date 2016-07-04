@@ -1,0 +1,12 @@
+@font-face {
+    font-family: 'exo_2.0regular';
+    src: url('Exo2.0-Regular-webfont.eot');
+    src: url('Exo2.0-Regular-webfont.eot?#iefix') format('embedded-opentype'),
+         url('Exo2.0-Regular-webfont.woff') format('woff'),
+         url('Exo2.0-Regular-webfont.ttf') format('truetype'),
+         url('Exo2.0-Regular-webfont.svg#exo_2.0regular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+

@@ -3,6 +3,7 @@ namespace App\Http\Controllers;
 
 use App;
 use App\Models\Website;
+use Auth;
 use Illuminate\Http\Response as FullResponse;
 use Log;
 use Request;
@@ -49,12 +50,17 @@ class DisplayController extends Controller
                         (new HtmlPageCrawler($include_part))->setInnerHtml($include_data);
                     }
                 }
-                /*
-                $crawler->filter('body')->append(view('sitarium/sitarium_scope', array(
-                    'editable_files' => $website->getEditableFiles(),
-                    'backups' => $website->getBackups()
-                ))->render());
-                */
+                
+                $data = [];
+                if (Auth::check())
+                {
+                    $data = [
+                        'editable_files' => $website->getEditableFiles(),
+                        'backups' => $website->getBackups()
+                    ];
+                }
+                $crawler->filter('body')->append(view('fly_editor/fly_editor', $data)->render());
+                
                 return new FullResponse($crawler, $status);
             } else {
                 // Page still not found...
