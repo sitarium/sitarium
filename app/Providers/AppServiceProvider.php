@@ -26,8 +26,8 @@ class AppServiceProvider extends ServiceProvider
         Asset::container('jquery')->add('jquery', 'sitarium/jquery/jquery.min.js');
         
         // Bootstrap
-        Asset::container('sitarium-bootstrap')->add('bootstrap', 'sitarium/bootstrap/css/bootstrap.min.css');
-        Asset::container('sitarium-bootstrap')->add('bootstrap', 'sitarium/bootstrap/js/bootstrap.min.js');
+        Asset::container('bootstrap')->add('bootstrap', 'sitarium/bootstrap/css/bootstrap.min.css');
+        Asset::container('bootstrap')->add('bootstrap', 'sitarium/bootstrap/js/bootstrap.min.js');
         
         // Ajax Form
         Asset::container('ajax-form')->add('ajax-form', 'sitarium/jungle-gecko/ajax-form/css/ajax-form.css');

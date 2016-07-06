@@ -17,8 +17,8 @@ DirectorySlash Off
     #
 	# Redirect hosted website specific resources, except php files and files with . or _
 	RewriteCond %{DOCUMENT_ROOT}/websites/%{HTTP_HOST}%{REQUEST_URI} -f
-	RewriteCond %{THE_REQUEST} !\s/+(.+?)\.php[\s?] [NC]
-	RewriteCond %{THE_REQUEST} !(^\.|/\.|\_|/\_)
+	RewriteCond %{REQUEST_FILENAME} !\.php$ [NC]
+	RewriteCond %{REQUEST_FILENAME} !(^\.|/\.|\_|/\_)
 	RewriteRule ^(.*)$ /websites/%{HTTP_HOST}/$1 [L]    
     #
     #
