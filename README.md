@@ -1,5 +1,10 @@
 # SITARIUM
 
+[![Latest Stable Version](https://poser.pugx.org/sitarium/sitarium/v/stable)](https://packagist.org/packages/sitarium/sitarium)
+[![Total Downloads](https://poser.pugx.org/sitarium/sitarium/downloads)](https://packagist.org/packages/sitarium/sitarium)
+[![Latest Unstable Version](https://poser.pugx.org/sitarium/sitarium/v/unstable)](https://packagist.org/packages/sitarium/sitarium)
+[![License](https://poser.pugx.org/sitarium/sitarium/license)](https://packagist.org/packages/sitarium/sitarium)
+
 Sitarium is a web application to host simple websites and offer an easy to edit for non experts. No need for a complex admin interface or back office. Sitarium is the new What you edit is what you get!
 
 Sitarium targets web designers and web developers that want to go straight to the point. Sitarium accelerates the tasks where your added value is minimum to let you focus on what matters.
