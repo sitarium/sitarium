@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Http\Controllers\Controller;
 use Auth;
+use Illuminate\Foundation\Auth\ResetsPasswords;
 use Request;
 use Response;
-use App\Http\Controllers\Controller;
-use Illuminate\Foundation\Auth\ResetsPasswords;
 
 class PasswordController extends Controller
 {
@@ -22,11 +22,11 @@ class PasswordController extends Controller
     */
 
     use ResetsPasswords;
-    
+
     private $linkRequestView = 'admin.passwords.email';
-    
+
     private $resetView = 'admin.passwords.reset';
-    
+
     private $redirectPath = '/admin';
 
     /**
@@ -47,30 +47,28 @@ class PasswordController extends Controller
     public function getEmail()
     {
         $email = '';
-        if (Auth::check())
-        {
+        if (Auth::check()) {
             $email = Auth::user()->email;
         }
+
         return $this->showLinkRequestForm()->with(compact('email'));
     }
 
     /**
      * Get the response for after the reset link has been successfully sent.
      *
-     * @param  string  $response
+     * @param string $response
+     *
      * @return \Symfony\Component\HttpFoundation\Response
      */
     protected function getSendResetLinkEmailSuccessResponse($response)
     {
-        if (Request::ajax() || Request::wantsJson())
-        {
-			return Response::json([
-				'code' => 0,
-				'message' => trans($response)
-			]);
-        }
-        else
-        {
+        if (Request::ajax() || Request::wantsJson()) {
+            return Response::json([
+                'code'    => 0,
+                'message' => trans($response),
+            ]);
+        } else {
             return redirect()->back()->with('status', trans($response));
         }
     }
@@ -78,42 +76,38 @@ class PasswordController extends Controller
     /**
      * Get the response for after the reset link could not be sent.
      *
-     * @param  string  $response
+     * @param string $response
+     *
      * @return \Symfony\Component\HttpFoundation\Response
      */
     protected function getSendResetLinkEmailFailureResponse($response)
     {
-        if (Request::ajax() || Request::wantsJson())
-        {
-			return Response::json([
-				'code' => 1,
-				'message' => trans($response)
-			], 500);
-        }
-        else
-        {
-            return redirect()->back()->withErrors(['email' => trans($response)]);  
+        if (Request::ajax() || Request::wantsJson()) {
+            return Response::json([
+                'code'    => 1,
+                'message' => trans($response),
+            ], 500);
+        } else {
+            return redirect()->back()->withErrors(['email' => trans($response)]);
         }
     }
 
     /**
      * Get the response for after a successful password reset.
      *
-     * @param  string  $response
+     * @param string $response
+     *
      * @return \Symfony\Component\HttpFoundation\Response
      */
     protected function getResetSuccessResponse($response)
     {
-        if (Request::ajax() || Request::wantsJson())
-        {
-			return Response::json([
-				'code' => 0,
-				'message' => trans($response),
-			    'callback_vars' => ['redirect_url' => $this->redirectPath()]
-			]);
-        }
-        else
-        {
+        if (Request::ajax() || Request::wantsJson()) {
+            return Response::json([
+                'code'          => 0,
+                'message'       => trans($response),
+                'callback_vars' => ['redirect_url' => $this->redirectPath()],
+            ]);
+        } else {
             return redirect($this->redirectPath())->with('status', trans($response));
         }
     }
@@ -121,21 +115,19 @@ class PasswordController extends Controller
     /**
      * Get the response for after a failing password reset.
      *
-     * @param  Request  $request
-     * @param  string  $response
+     * @param Request $request
+     * @param string  $response
+     *
      * @return \Symfony\Component\HttpFoundation\Response
      */
     protected function getResetFailureResponse(\Illuminate\Http\Request $request, $response)
     {
-        if (Request::ajax() || Request::wantsJson())
-        {
-			return Response::json([
-				'code' => 1,
-				'message' => trans($response)
-			], 500);
-        }
-        else
-        {
+        if (Request::ajax() || Request::wantsJson()) {
+            return Response::json([
+                'code'    => 1,
+                'message' => trans($response),
+            ], 500);
+        } else {
             return redirect()->back()
                 ->withInput($request->only('email'))
                 ->withErrors(['email' => trans($response)]);

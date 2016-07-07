@@ -1,8 +1,10 @@
-<?php namespace App\Http\Controllers;
+<?php
 
-use Auth;
+namespace App\Http\Controllers;
+
 use App\Models\User;
 use App\Models\Website;
+use Auth;
 
 class AdminController extends Controller
 {
