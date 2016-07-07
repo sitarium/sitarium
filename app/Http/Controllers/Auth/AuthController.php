@@ -2,16 +2,16 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Http\Controllers\Controller;
+use App\User;
 use Auth;
+use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
+use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Lang;
 use Request;
 use Response;
 use Session;
 use Validator;
-use App\User;
-use App\Http\Controllers\Controller;
-use Illuminate\Foundation\Auth\ThrottlesLogins;
-use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
 
 class AuthController extends Controller
 {
@@ -34,11 +34,11 @@ class AuthController extends Controller
      * @var string
      */
     protected $redirectTo = '/';
-    
+
     private $loginView = 'admin.login';
-    
+
     private $registerView = 'admin.register';
-    
+
     private $redirectPath = '/admin';
 
     /**
@@ -54,7 +54,8 @@ class AuthController extends Controller
     /**
      * Get a validator for an incoming registration request.
      *
-     * @param  array  $data
+     * @param array $data
+     *
      * @return \Illuminate\Contracts\Validation\Validator
      */
 //     protected function validator(array $data)
@@ -69,7 +70,8 @@ class AuthController extends Controller
     /**
      * Create a new user instance after a valid registration.
      *
-     * @param  array  $data
+     * @param array $data
+     *
      * @return User
      */
 //     protected function create(array $data)
@@ -84,59 +86,54 @@ class AuthController extends Controller
     /**
      * Get the failed login response instance.
      *
-     * @param \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
+     *
      * @return \Illuminate\Http\Response
      */
     protected function sendFailedLoginResponse(\Illuminate\Http\Request $request)
     {
-        if (Request::ajax())
-        {
+        if (Request::ajax()) {
             return Response::json([
-                'code' => 403,
-                'message' => $this->getFailedLoginMessage()
+                'code'    => 403,
+                'message' => $this->getFailedLoginMessage(),
             ]);
         }
-        
+
         return redirect()->back()
             ->withInput($request->only($this->loginUsername(), 'remember'))
             ->withErrors([
                 $this->loginUsername() => $this->getFailedLoginMessage(),
             ]);
     }
-    
+
     public function authenticated(\Illuminate\Http\Request $request)
     {
-        if($request->route()->domain() == env('SITARIUM_ADMIN_WEBSITE') && Auth::user()->admin !== true ) 
-        {
+        if ($request->route()->domain() == env('SITARIUM_ADMIN_WEBSITE') && Auth::user()->admin !== true) {
             Auth::logout();
-            if ($request->ajax() || $request->wantsJson())
-            {
-    			return Response::json([
-					'code' => 401,
-					'message' => Lang::has('sitarium.unauthorized_exception')
+            if ($request->ajax() || $request->wantsJson()) {
+                return Response::json([
+                    'code'    => 401,
+                    'message' => Lang::has('sitarium.unauthorized_exception')
                                     ? Lang::get('sitarium.unauthorized_exception')
-                                    : 'Unauthorized Exception!'
-    			], 401);
-            }
-            else
-            {
+                                    : 'Unauthorized Exception!',
+                ], 401);
+            } else {
                 return redirect()->guest('login', 401);
             }
         }
-        
+
         $intended_url = Session::pull('url.intended', $this->redirectPath);
-		
-        if (Request::ajax())
-        {
-			return Response::json([
-				'code' => 0,
-				'message' => Lang::has('sitarium.authentication_success')
+
+        if (Request::ajax()) {
+            return Response::json([
+                'code'    => 0,
+                'message' => Lang::has('sitarium.authentication_success')
                                 ? Lang::get('sitarium.authentication_success')
                                 : 'Authentication successful!',
-				'callback_vars' => ['redirect_url' => $intended_url]
-			]);
+                'callback_vars' => ['redirect_url' => $intended_url],
+            ]);
         }
-        
+
         return redirect()->intended($intended_url);
     }
 }

@@ -2,13 +2,11 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
 use App\Helpers\FileHelper;
-use Log;
+use Illuminate\Database\Eloquent\Model;
 
 class Website extends Model
 {
-
     private $websites_folder;
 
     private $backups_folder;
@@ -35,7 +33,7 @@ class Website extends Model
         'host',
         'name',
         'email',
-        'active'
+        'active',
     ];
 
     public function contactRequests()
@@ -53,13 +51,13 @@ class Website extends Model
      */
     public function existsOnDisk()
     {
-        return is_dir($this->websites_folder . '/' . $this->host);
+        return is_dir($this->websites_folder.'/'.$this->host);
     }
 
     public function getPagePath($requested_page)
     {
-        $path = $this->websites_folder . '/' . $this->host . '/' . $requested_page . '.blade.php';
-        
+        $path = $this->websites_folder.'/'.$this->host.'/'.$requested_page.'.blade.php';
+
         if (is_file($path)) {
             return $path;
         } else {
@@ -69,25 +67,25 @@ class Website extends Model
 
     public function getIncludeFiles()
     {
-        return 
-            collect(glob($this->websites_folder . '/' . $this->host . '/[_]*[.blade.php]'))
+        return
+            collect(glob($this->websites_folder.'/'.$this->host.'/[_]*[.blade.php]'))
             ->keyBy(function ($item) {
-                return substr(strrchr($item, '/'), 2, - 10);
+                return substr(strrchr($item, '/'), 2, -10);
             })
             ->toArray();
     }
 
     public function getEditableFiles()
     {
-        return 
-            collect(glob($this->websites_folder . '/' . $this->host . '/[!_]*[.blade.php]'))
-            ->filter(function($item, $key) {
+        return
+            collect(glob($this->websites_folder.'/'.$this->host.'/[!_]*[.blade.php]'))
+            ->filter(function ($item, $key) {
                 return is_file($item);
             })
             ->map(function ($item, $key) {
                 return [
-                    'name' => substr(strrchr($item, '/'), 1, - 10),
-                    'date' => date('d/m/Y H:i', filemtime($item))
+                    'name' => substr(strrchr($item, '/'), 1, -10),
+                    'date' => date('d/m/Y H:i', filemtime($item)),
                 ];
             })
             ->keyBy('name')
@@ -98,7 +96,7 @@ class Website extends Model
     public function savePage($page, $content)
     {
         $requested_page = $this->getPagePath($page);
-        
+
         if ($requested_page !== false) {
             return file_put_contents($requested_page, $content);
         } else {
@@ -108,67 +106,67 @@ class Website extends Model
 
     public function saveImage($filename, $img_data)
     {
-        if (! is_dir($this->websites_folder . '/' . $this->host . '/images/uploads/')) {
-            mkdir($this->websites_folder . '/' . $this->host . '/images/uploads', null, true);
+        if (!is_dir($this->websites_folder.'/'.$this->host.'/images/uploads/')) {
+            mkdir($this->websites_folder.'/'.$this->host.'/images/uploads', null, true);
         }
-        
-        $handle = fopen($this->websites_folder . '/' . $this->host . '/images/uploads/' . $filename, 'w');
+
+        $handle = fopen($this->websites_folder.'/'.$this->host.'/images/uploads/'.$filename, 'w');
         fwrite($handle, $img_data);
         fclose($handle);
     }
 
     public function backupExists($backup_name)
     {
-        return is_dir($this->websites_folder . '/' . $this->host . '/' . $this->backups_folder . '/' . $backup_name);
+        return is_dir($this->websites_folder.'/'.$this->host.'/'.$this->backups_folder.'/'.$backup_name);
     }
 
     public function getBackups()
     {
-        return 
-            collect(glob($this->websites_folder . '/' . $this->host . '/' . $this->backups_folder . '/[!_]*'))
+        return
+            collect(glob($this->websites_folder.'/'.$this->host.'/'.$this->backups_folder.'/[!_]*'))
             ->sort(function ($a, $b) {
                 return filemtime($a) - filemtime($b);
             })
-            ->filter(function($item, $key) {
+            ->filter(function ($item, $key) {
                 return is_file($item);
             })
             ->map(function ($item, $key) {
                 return [
                     'name' => substr(strrchr($item, '/'), 1),
-                    'date' => date('d/m/Y H:i', filemtime($item))
+                    'date' => date('d/m/Y H:i', filemtime($item)),
                 ];
             })
             ->keyBy('name')
             ->sortBy('name')
             ->toArray();
-        
     }
 
     public function makeBackup($backup_name)
     {
-        FileHelper::recursiveCopy($this->websites_folder . '/' . $this->host, $this->websites_folder . '/' . $this->host . '/' . $this->backups_folder . '/' . $backup_name, array(
+        FileHelper::recursiveCopy($this->websites_folder.'/'.$this->host, $this->websites_folder.'/'.$this->host.'/'.$this->backups_folder.'/'.$backup_name, [
             $this->backups_folder,
-            '.svn'
-        ));
-        return date('d/m/Y H:i', filemtime($this->websites_folder . '/' . $this->host . '/' . $this->backups_folder . '/' . $backup_name));
+            '.svn',
+        ]);
+
+        return date('d/m/Y H:i', filemtime($this->websites_folder.'/'.$this->host.'/'.$this->backups_folder.'/'.$backup_name));
     }
 
     public function deleteBackup($backup_name)
     {
-        FileHelper::recursiveDelete($this->websites_folder . '/' . $this->host . '/' . $this->backups_folder . '/' . $backup_name);
+        FileHelper::recursiveDelete($this->websites_folder.'/'.$this->host.'/'.$this->backups_folder.'/'.$backup_name);
     }
 
     public function restoreBackup($backup_name)
     {
-        $tmp_folder = storage_path() . '/tmp/' . $this->host . '/' . date('Ymd-His');
+        $tmp_folder = storage_path().'/tmp/'.$this->host.'/'.date('Ymd-His');
         // copying selected backup into a safe place
-        FileHelper::recursiveCopy($this->websites_folder . '/' . $this->host . '/' . $this->backups_folder . '/' . $backup_name, $tmp_folder);
+        FileHelper::recursiveCopy($this->websites_folder.'/'.$this->host.'/'.$this->backups_folder.'/'.$backup_name, $tmp_folder);
         // copying also the backups
-        FileHelper::recursiveCopy($this->websites_folder . '/' . $this->host . '/' . $this->backups_folder, $tmp_folder . '/' . $this->backups_folder);
+        FileHelper::recursiveCopy($this->websites_folder.'/'.$this->host.'/'.$this->backups_folder, $tmp_folder.'/'.$this->backups_folder);
         // deleting the content of the website
-        FileHelper::recursiveDelete($this->websites_folder . '/' . $this->host, true);
+        FileHelper::recursiveDelete($this->websites_folder.'/'.$this->host, true);
         // moving saved backup at the right place
-        FileHelper::recursiveCopy($tmp_folder, $this->websites_folder . '/' . $this->host);
+        FileHelper::recursiveCopy($tmp_folder, $this->websites_folder.'/'.$this->host);
         FileHelper::recursiveDelete($tmp_folder);
     }
 }
