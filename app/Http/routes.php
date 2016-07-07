@@ -1,6 +1,5 @@
 <?php
 
-use Illuminate\Auth\AuthenticationException;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,8 +13,7 @@ use Illuminate\Auth\AuthenticationException;
 */
 
 // Routes for main domain
-Route::group(['domain' => env('SITARIUM_ADMIN_WEBSITE')], function()
-{
+Route::group(['domain' => env('SITARIUM_ADMIN_WEBSITE')], function () {
     // Authentication Routes
     $this->get('login', 'Auth\AuthController@showLoginForm');
     $this->post('login', 'Auth\AuthController@login');
@@ -29,10 +27,10 @@ Route::group(['domain' => env('SITARIUM_ADMIN_WEBSITE')], function()
     $this->get('password/reset/{token?}', 'Auth\PasswordController@showResetForm');
     $this->post('password/email', 'Auth\PasswordController@sendResetLinkEmail');
     $this->post('password/reset', 'Auth\PasswordController@reset');
-    
+
     // Main page
     Route::get('/', 'HomeController@index');
-    
+
     // Admin page
     Route::get('/admin', 'AdminController@index');
 });
@@ -42,7 +40,7 @@ Route::get('/{page?}', 'DisplayController@show');
 
 // Routes for authentication
 Route::post('/sitarium/login', 'LoginController@login');
-Route::get ('/sitarium/logout', 'LoginController@logout');
+Route::get('/sitarium/logout', 'LoginController@logout');
 
 
 
@@ -53,7 +51,7 @@ Route::get ('/sitarium/logout', 'LoginController@logout');
 // Route::get('/', function () {
 //     return view('welcome');
 // });
-    
+
 // Route::auth();
 
 // Route::get('/home', 'HomeController@index');
