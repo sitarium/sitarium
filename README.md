@@ -1,5 +1,7 @@
 # SITARIUM
 
+[![StyleCI](https://styleci.io/repos/60374517/shield)](https://styleci.io/repos/60374517)
+[![Build Status](https://travis-ci.org/sitarium/sitarium.svg)](https://travis-ci.org/sitarium/sitarium)
 [![Latest Stable Version](https://poser.pugx.org/sitarium/sitarium/v/stable)](https://packagist.org/packages/sitarium/sitarium)
 [![Total Downloads](https://poser.pugx.org/sitarium/sitarium/downloads)](https://packagist.org/packages/sitarium/sitarium)
 [![Latest Unstable Version](https://poser.pugx.org/sitarium/sitarium/v/unstable)](https://packagist.org/packages/sitarium/sitarium)
