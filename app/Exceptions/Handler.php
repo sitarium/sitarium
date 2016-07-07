@@ -52,10 +52,10 @@ class Handler extends ExceptionHandler
                 'message' => Lang::has('sitarium.validation_exception')
                                 ? Lang::get('sitarium.validation_exception')
                                 : 'Validation Exception!',
-                'errors' => $e->getResponse()->getData()
+                'errors' => $e->getResponse()->getData(),
             ]);
         }
 
-		return parent::render($request, $e);
+        return parent::render($request, $e);
     }
 }
