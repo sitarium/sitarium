@@ -23,7 +23,7 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
-    
+
     /**
      * The attributes that should be casted to native types.
      *
@@ -37,7 +37,7 @@ class User extends Authenticatable
     {
         return $this->belongsToMany('\App\Models\Website');
     }
-    
+
     public function isAuthorizedOnWebsite($website)
     {
         return collect($this->websites)->contains('name', $website->name);
