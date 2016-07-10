@@ -7,7 +7,9 @@ php:
   - 7.0
   - hhvm
   
-before-script: 
+sudo: false
+
+before_script: 
   - mysql -e 'create database sitarium;'
   - mv .env.travis .env
   - chmod -R 777 storage
