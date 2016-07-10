@@ -6,13 +6,16 @@ php:
   - 5.6
   - 7.0
   - hhvm
-
-sudo: false
-
-before_install:
-  - travis_retry composer self-update
-
-install:
-  - travis_retry composer install --no-interaction --prefer-dist
+  
+before-script: 
+  - mysql -e 'create database forge;'
+  - mv .env.travis .env
+  - chmod -R 777 storage
+  - touch storage/acceptance.sqlite
+  - composer self-update
+  - composer install --prefer-source
+  - php artisan key:generate
+  - php artisan migrate:refresh --seed
+  - php artisan serve >/dev/null 2>&1 &
 
 script: vendor/bin/phpunit
