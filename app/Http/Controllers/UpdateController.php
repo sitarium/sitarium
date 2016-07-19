@@ -9,7 +9,6 @@ use Hash;
 use Input;
 use Request;
 use Response;
-use App\Models\User;
 use Wa72\HtmlPageDom\HtmlPageCrawler;
 
 class UpdateController extends Controller

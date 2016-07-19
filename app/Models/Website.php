@@ -107,11 +107,7 @@ class Website extends Model
 
     public function saveImage($filename, $img_data)
     {
-<<<<<<< HEAD
         if (! is_dir($this->websites_folder.'/'.$this->host.'/images/uploads/')) {
-=======
-        if (!is_dir($this->websites_folder.'/'.$this->host.'/images/uploads/')) {
->>>>>>> refs/remotes/sitarium-master/analysis-8jl2wy
             mkdir($this->websites_folder.'/'.$this->host.'/images/uploads', null, true);
         }
 

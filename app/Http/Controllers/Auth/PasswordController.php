@@ -84,11 +84,7 @@ class PasswordController extends Controller
     {
         if (Request::ajax() || Request::wantsJson()) {
             return Response::json([
-<<<<<<< HEAD
                 'code' => 1,
-=======
-                'code'    => 1,
->>>>>>> refs/remotes/sitarium-master/analysis-8jl2wy
                 'message' => trans($response),
             ], 500);
         } else {
@@ -107,13 +103,8 @@ class PasswordController extends Controller
     {
         if (Request::ajax() || Request::wantsJson()) {
             return Response::json([
-<<<<<<< HEAD
                 'code' => 0,
                 'message' => trans($response),
-=======
-                'code'          => 0,
-                'message'       => trans($response),
->>>>>>> refs/remotes/sitarium-master/analysis-8jl2wy
                 'callback_vars' => ['redirect_url' => $this->redirectPath()],
             ]);
         } else {
@@ -133,11 +124,7 @@ class PasswordController extends Controller
     {
         if (Request::ajax() || Request::wantsJson()) {
             return Response::json([
-<<<<<<< HEAD
                 'code' => 1,
-=======
-                'code'    => 1,
->>>>>>> refs/remotes/sitarium-master/analysis-8jl2wy
                 'message' => trans($response),
             ], 500);
         } else {

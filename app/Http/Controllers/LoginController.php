@@ -11,8 +11,6 @@ use Redirect;
 use Request;
 use Response;
 use Session;
-use App\Models\User;
-use App\Models\Website;
 
 class LoginController extends Controller
 {
