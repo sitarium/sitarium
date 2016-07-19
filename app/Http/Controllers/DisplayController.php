@@ -15,11 +15,7 @@ class DisplayController extends Controller
     public function show($page = 'index')
     {
         $website = Website::where([
-<<<<<<< HEAD
-            'host' => Request::server('HTTP_HOST'),
-=======
             'host'   => Request::server('HTTP_HOST'),
->>>>>>> refs/remotes/sitarium-master/analysis-8jl2wy
             'active' => true,
         ])->first();
 
@@ -60,11 +56,7 @@ class DisplayController extends Controller
                 if (Auth::check()) {
                     $data = [
                         'editable_files' => $website->getEditableFiles(),
-<<<<<<< HEAD
-                        'backups' => $website->getBackups(),
-=======
                         'backups'        => $website->getBackups(),
->>>>>>> refs/remotes/sitarium-master/analysis-8jl2wy
                     ];
                 }
                 $crawler->filter('body')->append(view('fly_editor/fly_editor', $data)->render());

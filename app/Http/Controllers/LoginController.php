@@ -1,9 +1,4 @@
 <?php
-<<<<<<< HEAD
-
-namespace App\Http\Controllers;
-=======
->>>>>>> refs/remotes/sitarium-master/analysis-8jl2wy
 
 namespace App\Http\Controllers;
 
@@ -16,11 +11,8 @@ use Redirect;
 use Request;
 use Response;
 use Session;
-<<<<<<< HEAD
 use App\Models\User;
 use App\Models\Website;
-=======
->>>>>>> refs/remotes/sitarium-master/analysis-8jl2wy
 
 class LoginController extends Controller
 {
@@ -46,11 +38,7 @@ class LoginController extends Controller
                     'host' => Request::server('HTTP_HOST'),
             ])->firstOrFail();
 
-<<<<<<< HEAD
-            if (! Auth::user()->isAuthorizedOnWebsite($website)) {
-=======
             if (!Auth::user()->isAuthorizedOnWebsite($website)) {
->>>>>>> refs/remotes/sitarium-master/analysis-8jl2wy
                 Auth::logout();
 
                 return Response::json([
@@ -63,27 +51,6 @@ class LoginController extends Controller
             $intended_url = Session::pull('url.intended', '');
 
             return Response::json([
-<<<<<<< HEAD
-                    'code' => 0,
-                    'message' => 'Bienvenue ! Passons à la partie fun maintenant !',
-                    'callback_vars' => ['intended_url' => $intended_url],
-            ]);
-        }
-    }
-
-    public function logout()
-    {
-        Auth::logout();
-
-        return Redirect::to('/');
-    }
-
-    public function insert()
-    {
-        $user = new User([
-            'name' => 'test',
-            'email' => 'jerome.gras@gmail.com',
-=======
                     'code'          => 0,
                     'message'       => 'Bienvenue ! Passons à la partie fun maintenant !',
                     'callback_vars' => ['intended_url' => $intended_url],
@@ -103,7 +70,6 @@ class LoginController extends Controller
         $user = new User([
             'name'     => 'test',
             'email'    => 'jerome.gras@gmail.com',
->>>>>>> refs/remotes/sitarium-master/analysis-8jl2wy
             'password' => Hash::make('aaa'),
         ]);
 

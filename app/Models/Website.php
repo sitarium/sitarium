@@ -3,10 +3,7 @@
 namespace App\Models;
 
 use App\Helpers\FileHelper;
-<<<<<<< HEAD
-=======
 use Illuminate\Database\Eloquent\Model;
->>>>>>> refs/remotes/sitarium-master/analysis-8jl2wy
 
 class Website extends Model
 {

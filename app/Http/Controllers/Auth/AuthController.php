@@ -94,11 +94,7 @@ class AuthController extends Controller
     {
         if (Request::ajax()) {
             return Response::json([
-<<<<<<< HEAD
-                'code' => 403,
-=======
                 'code'    => 403,
->>>>>>> refs/remotes/sitarium-master/analysis-8jl2wy
                 'message' => $this->getFailedLoginMessage(),
             ]);
         }
@@ -116,11 +112,7 @@ class AuthController extends Controller
             Auth::logout();
             if ($request->ajax() || $request->wantsJson()) {
                 return Response::json([
-<<<<<<< HEAD
-                    'code' => 401,
-=======
                     'code'    => 401,
->>>>>>> refs/remotes/sitarium-master/analysis-8jl2wy
                     'message' => Lang::has('sitarium.unauthorized_exception')
                                     ? Lang::get('sitarium.unauthorized_exception')
                                     : 'Unauthorized Exception!',
@@ -134,11 +126,7 @@ class AuthController extends Controller
 
         if (Request::ajax()) {
             return Response::json([
-<<<<<<< HEAD
-                'code' => 0,
-=======
                 'code'    => 0,
->>>>>>> refs/remotes/sitarium-master/analysis-8jl2wy
                 'message' => Lang::has('sitarium.authentication_success')
                                 ? Lang::get('sitarium.authentication_success')
                                 : 'Authentication successful!',
