@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Http\Controllers\Controller;
 use Auth;
+use Illuminate\Foundation\Auth\ResetsPasswords;
 use Request;
 use Response;
-use App\Http\Controllers\Controller;
-use Illuminate\Foundation\Auth\ResetsPasswords;
 
 class PasswordController extends Controller
 {
@@ -57,14 +57,19 @@ class PasswordController extends Controller
     /**
      * Get the response for after the reset link has been successfully sent.
      *
-     * @param  string  $response
+     * @param string $response
+     *
      * @return \Symfony\Component\HttpFoundation\Response
      */
     protected function getSendResetLinkEmailSuccessResponse($response)
     {
         if (Request::ajax() || Request::wantsJson()) {
             return Response::json([
+<<<<<<< HEAD
                 'code' => 0,
+=======
+                'code'    => 0,
+>>>>>>> refs/remotes/sitarium-master/analysis-8jl2wy
                 'message' => trans($response),
             ]);
         } else {
@@ -75,14 +80,19 @@ class PasswordController extends Controller
     /**
      * Get the response for after the reset link could not be sent.
      *
-     * @param  string  $response
+     * @param string $response
+     *
      * @return \Symfony\Component\HttpFoundation\Response
      */
     protected function getSendResetLinkEmailFailureResponse($response)
     {
         if (Request::ajax() || Request::wantsJson()) {
             return Response::json([
+<<<<<<< HEAD
                 'code' => 1,
+=======
+                'code'    => 1,
+>>>>>>> refs/remotes/sitarium-master/analysis-8jl2wy
                 'message' => trans($response),
             ], 500);
         } else {
@@ -93,15 +103,21 @@ class PasswordController extends Controller
     /**
      * Get the response for after a successful password reset.
      *
-     * @param  string  $response
+     * @param string $response
+     *
      * @return \Symfony\Component\HttpFoundation\Response
      */
     protected function getResetSuccessResponse($response)
     {
         if (Request::ajax() || Request::wantsJson()) {
             return Response::json([
+<<<<<<< HEAD
                 'code' => 0,
                 'message' => trans($response),
+=======
+                'code'          => 0,
+                'message'       => trans($response),
+>>>>>>> refs/remotes/sitarium-master/analysis-8jl2wy
                 'callback_vars' => ['redirect_url' => $this->redirectPath()],
             ]);
         } else {
@@ -112,15 +128,20 @@ class PasswordController extends Controller
     /**
      * Get the response for after a failing password reset.
      *
-     * @param  Request  $request
-     * @param  string  $response
+     * @param Request $request
+     * @param string  $response
+     *
      * @return \Symfony\Component\HttpFoundation\Response
      */
     protected function getResetFailureResponse(\Illuminate\Http\Request $request, $response)
     {
         if (Request::ajax() || Request::wantsJson()) {
             return Response::json([
+<<<<<<< HEAD
                 'code' => 1,
+=======
+                'code'    => 1,
+>>>>>>> refs/remotes/sitarium-master/analysis-8jl2wy
                 'message' => trans($response),
             ], 500);
         } else {

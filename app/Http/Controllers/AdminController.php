@@ -1,10 +1,15 @@
 <?php
+<<<<<<< HEAD
+
+namespace App\Http\Controllers;
+=======
+>>>>>>> refs/remotes/sitarium-master/analysis-8jl2wy
 
 namespace App\Http\Controllers;
 
-use Auth;
 use App\Models\User;
 use App\Models\Website;
+use Auth;
 
 class AdminController extends Controller
 {

@@ -16,8 +16,8 @@ class AppServiceProvider extends ServiceProvider
     {
         //
         $this->publishes([
-            base_path('vendor/components/jquery')  => base_path('public/sitarium/jquery'),
-            base_path('vendor/components/bootstrap')  => base_path('public/sitarium/bootstrap'),
+            base_path('vendor/components/jquery')       => base_path('public/sitarium/jquery'),
+            base_path('vendor/components/bootstrap')    => base_path('public/sitarium/bootstrap'),
             base_path('vendor/jungle-gecko/ajax-form')  => base_path('public/sitarium/jungle-gecko/ajax-form'),
         ], 'assets');
 

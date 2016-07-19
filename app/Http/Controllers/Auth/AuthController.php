@@ -2,16 +2,16 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Http\Controllers\Controller;
+use App\User;
 use Auth;
+use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
+use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Lang;
 use Request;
 use Response;
 use Session;
 use Validator;
-use App\User;
-use App\Http\Controllers\Controller;
-use Illuminate\Foundation\Auth\ThrottlesLogins;
-use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
 
 class AuthController extends Controller
 {
@@ -54,7 +54,8 @@ class AuthController extends Controller
     /**
      * Get a validator for an incoming registration request.
      *
-     * @param  array  $data
+     * @param array $data
+     *
      * @return \Illuminate\Contracts\Validation\Validator
      */
 //     protected function validator(array $data)
@@ -69,7 +70,8 @@ class AuthController extends Controller
     /**
      * Create a new user instance after a valid registration.
      *
-     * @param  array  $data
+     * @param array $data
+     *
      * @return User
      */
 //     protected function create(array $data)
@@ -84,14 +86,19 @@ class AuthController extends Controller
     /**
      * Get the failed login response instance.
      *
-     * @param \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
+     *
      * @return \Illuminate\Http\Response
      */
     protected function sendFailedLoginResponse(\Illuminate\Http\Request $request)
     {
         if (Request::ajax()) {
             return Response::json([
+<<<<<<< HEAD
                 'code' => 403,
+=======
+                'code'    => 403,
+>>>>>>> refs/remotes/sitarium-master/analysis-8jl2wy
                 'message' => $this->getFailedLoginMessage(),
             ]);
         }
@@ -109,7 +116,11 @@ class AuthController extends Controller
             Auth::logout();
             if ($request->ajax() || $request->wantsJson()) {
                 return Response::json([
+<<<<<<< HEAD
                     'code' => 401,
+=======
+                    'code'    => 401,
+>>>>>>> refs/remotes/sitarium-master/analysis-8jl2wy
                     'message' => Lang::has('sitarium.unauthorized_exception')
                                     ? Lang::get('sitarium.unauthorized_exception')
                                     : 'Unauthorized Exception!',
@@ -123,7 +134,11 @@ class AuthController extends Controller
 
         if (Request::ajax()) {
             return Response::json([
+<<<<<<< HEAD
                 'code' => 0,
+=======
+                'code'    => 0,
+>>>>>>> refs/remotes/sitarium-master/analysis-8jl2wy
                 'message' => Lang::has('sitarium.authentication_success')
                                 ? Lang::get('sitarium.authentication_success')
                                 : 'Authentication successful!',

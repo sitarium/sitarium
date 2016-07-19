@@ -1,7 +1,7 @@
 <?php
 
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
 
 class CreateWebsitesTable extends Migration
 {
@@ -15,7 +15,11 @@ class CreateWebsitesTable extends Migration
         DB::transaction(function () {
             Schema::create('websites', function (Blueprint $table) {
                 $table->increments('id');
+<<<<<<< HEAD
                 $table->string('host')->unique();
+=======
+                $table->string('host');
+>>>>>>> refs/remotes/sitarium-master/analysis-8jl2wy
                 $table->string('name');
                 $table->string('email');
                 $table->boolean('active');

@@ -3,12 +3,16 @@
 namespace App\Http\Controllers;
 
 use App;
+use App\Models\User;
 use Auth;
 use Hash;
 use Input;
 use Request;
 use Response;
+<<<<<<< HEAD
 use App\Models\User;
+=======
+>>>>>>> refs/remotes/sitarium-master/analysis-8jl2wy
 use Wa72\HtmlPageDom\HtmlPageCrawler;
 
 class UpdateController extends Controller
@@ -18,7 +22,11 @@ class UpdateController extends Controller
         $this->middleware('auth');
 
         $site = Site::where([
+<<<<<<< HEAD
             'host' => Request::server('HTTP_HOST'),
+=======
+            'host'   => Request::server('HTTP_HOST'),
+>>>>>>> refs/remotes/sitarium-master/analysis-8jl2wy
             'active' => true,
         ])->first();
 
@@ -42,7 +50,11 @@ class UpdateController extends Controller
                 $site->savePage($page, $target_crawler->saveHTML());
 
                 return Response::json([
+<<<<<<< HEAD
                     'code' => 0,
+=======
+                    'code'    => 0,
+>>>>>>> refs/remotes/sitarium-master/analysis-8jl2wy
                     'message' => 'C\'est fait !',
                 ]);
             } else {
@@ -60,7 +72,11 @@ class UpdateController extends Controller
         $this->middleware('auth');
 
         $site = Site::where([
+<<<<<<< HEAD
             'host' => Request::server('HTTP_HOST'),
+=======
+            'host'   => Request::server('HTTP_HOST'),
+>>>>>>> refs/remotes/sitarium-master/analysis-8jl2wy
             'active' => true,
         ])->first();
 
@@ -75,8 +91,13 @@ class UpdateController extends Controller
             $site->saveImage($filename, $img_data);
 
             return Response::json([
+<<<<<<< HEAD
                 'status' => 'success',
                 'url' => 'images/uploads/'.$filename.'?'.time(), // added the time to force update when editing multiple times
+=======
+                'status'   => 'success',
+                'url'      => 'images/uploads/'.$filename.'?'.time(), // added the time to force update when editing multiple times
+>>>>>>> refs/remotes/sitarium-master/analysis-8jl2wy
                 'filename' => $filename,
             ]);
         } else {
@@ -90,7 +111,11 @@ class UpdateController extends Controller
         $this->middleware('auth');
 
         $site = Site::where([
+<<<<<<< HEAD
             'host' => Request::server('HTTP_HOST'),
+=======
+            'host'   => Request::server('HTTP_HOST'),
+>>>>>>> refs/remotes/sitarium-master/analysis-8jl2wy
             'active' => true,
         ])->first();
 
@@ -100,15 +125,24 @@ class UpdateController extends Controller
             if ($backup_name != '') {
                 if ($site->backupExists($backup_name)) {
                     return Response::json([
+<<<<<<< HEAD
                         'code' => -1,
+=======
+                        'code'    => -1,
+>>>>>>> refs/remotes/sitarium-master/analysis-8jl2wy
                         'message' => 'Ce nom de sauvegarde est déjà pris. Essayons autre chose.',
                     ]);
                 } else {
                     $backup_date = $site->makeBackup($backup_name);
 
                     return Response::json([
+<<<<<<< HEAD
                         'code' => 0,
                         'message' => 'C\'est fait !',
+=======
+                        'code'          => 0,
+                        'message'       => 'C\'est fait !',
+>>>>>>> refs/remotes/sitarium-master/analysis-8jl2wy
                         'callback_vars' => [
                             'backup_name' => $backup_name,
                             'backup_date' => $backup_date,
@@ -117,7 +151,11 @@ class UpdateController extends Controller
                 }
             } else {
                 return Response::json([
+<<<<<<< HEAD
                     'code' => -1,
+=======
+                    'code'    => -1,
+>>>>>>> refs/remotes/sitarium-master/analysis-8jl2wy
                     'message' => 'Oula, ce nom de sauvegarde n\'est pas autorisé ! Contentons-nous des lettres, chiffres et tiret.',
                 ]);
             }
@@ -132,23 +170,37 @@ class UpdateController extends Controller
         $this->middleware('auth');
 
         $site = Site::where([
+<<<<<<< HEAD
             'host' => Request::server('HTTP_HOST'),
+=======
+            'host'   => Request::server('HTTP_HOST'),
+>>>>>>> refs/remotes/sitarium-master/analysis-8jl2wy
             'active' => true,
         ])->first();
 
         if ($site != null && $site->existsOnDisk()) {
             $backup_name = preg_replace('/[^a-zA-Z0-9-]/', '', trim(Input::get('backup_name')));
 
+<<<<<<< HEAD
             if (! $site->backupExists($backup_name)) {
                 return Response::json([
                     'code' => -1,
+=======
+            if (!$site->backupExists($backup_name)) {
+                return Response::json([
+                    'code'    => -1,
+>>>>>>> refs/remotes/sitarium-master/analysis-8jl2wy
                     'message' => 'Sauvegarde introuvable.',
                 ]);
             } else {
                 $site->deleteBackup($backup_name);
 
                 return Response::json([
+<<<<<<< HEAD
                     'code' => 0,
+=======
+                    'code'    => 0,
+>>>>>>> refs/remotes/sitarium-master/analysis-8jl2wy
                     'message' => 'Sauvegarde supprimée !',
                 ]);
             }
@@ -163,23 +215,37 @@ class UpdateController extends Controller
         $this->middleware('auth');
 
         $site = Site::where([
+<<<<<<< HEAD
             'host' => Request::server('HTTP_HOST'),
+=======
+            'host'   => Request::server('HTTP_HOST'),
+>>>>>>> refs/remotes/sitarium-master/analysis-8jl2wy
             'active' => true,
         ])->first();
 
         if ($site != null && $site->existsOnDisk()) {
             $backup_name = preg_replace('/[^a-zA-Z0-9-]/', '', trim(Input::get('backup_name')));
 
+<<<<<<< HEAD
             if (! $site->backupExists($backup_name)) {
                 return Response::json([
                     'code' => -1,
+=======
+            if (!$site->backupExists($backup_name)) {
+                return Response::json([
+                    'code'    => -1,
+>>>>>>> refs/remotes/sitarium-master/analysis-8jl2wy
                     'message' => 'Sauvegarde introuvable.',
                 ]);
             } else {
                 $site->restoreBackup($backup_name);
 
                 return Response::json([
+<<<<<<< HEAD
                     'code' => 0,
+=======
+                    'code'    => 0,
+>>>>>>> refs/remotes/sitarium-master/analysis-8jl2wy
                     'message' => 'Sauvegarde restaurée !',
                 ]);
             }
@@ -193,8 +259,13 @@ class UpdateController extends Controller
     {
         if (Auth::check() && Auth::user()->name == 'Jungle Gecko') {
             echo User::firstOrCreate([
+<<<<<<< HEAD
                 'name' => Input::get('name'),
                 'email' => Input::get('email'),
+=======
+                'name'     => Input::get('name'),
+                'email'    => Input::get('email'),
+>>>>>>> refs/remotes/sitarium-master/analysis-8jl2wy
                 'password' => Hash::make(Input::get('password')),
             ]);
         } else {

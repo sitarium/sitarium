@@ -2,8 +2,11 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
 use App\Helpers\FileHelper;
+<<<<<<< HEAD
+=======
+use Illuminate\Database\Eloquent\Model;
+>>>>>>> refs/remotes/sitarium-master/analysis-8jl2wy
 
 class Website extends Model
 {
@@ -107,7 +110,11 @@ class Website extends Model
 
     public function saveImage($filename, $img_data)
     {
+<<<<<<< HEAD
         if (! is_dir($this->websites_folder.'/'.$this->host.'/images/uploads/')) {
+=======
+        if (!is_dir($this->websites_folder.'/'.$this->host.'/images/uploads/')) {
+>>>>>>> refs/remotes/sitarium-master/analysis-8jl2wy
             mkdir($this->websites_folder.'/'.$this->host.'/images/uploads', null, true);
         }
 
