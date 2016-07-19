@@ -1,6 +1,6 @@
 <?php
 
-class AvailabilityTest extends TestCase
+class AdminSiteAvailabilityTest extends TestCase
 {
     /**
      * A basic functional test example.

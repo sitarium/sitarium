@@ -11,10 +11,11 @@ class Website extends Model
 
     private $backups_folder;
 
-    public function __construct()
+    public function __construct(array $attributes = [])
     {
-        $this->websites_folder = public_path(env('SITARIUM_WEBSITES_FOLDER', 'websites'));
-        $this->backups_folder = env('SITARIUM_BACKUPS_FOLDER', 'backups');
+        $this->websites_folder = public_path(env('App_WEBSITES_FOLDER', 'websites'));
+        $this->backups_folder = env('App_BACKUPS_FOLDER', 'backups');
+        parent::__construct($attributes);
     }
 
     /**
@@ -38,12 +39,12 @@ class Website extends Model
 
     public function contactRequests()
     {
-        return $this->hasMany('\Sitarium\Models\ContactRequest');
+        return $this->hasMany('\App\Models\ContactRequest');
     }
 
     public function users()
     {
-        return $this->belongsToMany('\Sitarium\Models\User');
+        return $this->belongsToMany('\App\Models\User');
     }
 
     /*

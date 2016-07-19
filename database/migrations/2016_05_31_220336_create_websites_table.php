@@ -15,7 +15,7 @@ class CreateWebsitesTable extends Migration
         DB::transaction(function () {
             Schema::create('websites', function (Blueprint $table) {
                 $table->increments('id');
-                $table->string('host');
+                $table->string('host')->unique();
                 $table->string('name');
                 $table->string('email');
                 $table->boolean('active');
