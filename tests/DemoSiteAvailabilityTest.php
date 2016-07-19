@@ -3,7 +3,7 @@
 class DemoSiteAvailabilityTest extends TestCase
 {
     protected $baseUrl = 'http://demo.localhost';
-    
+
     /**
      * A basic functional test example.
      *
@@ -11,7 +11,7 @@ class DemoSiteAvailabilityTest extends TestCase
      */
     public function testAvailability()
     {
-        $this->visit('/') 
+        $this->visit('/')
              ->see('Demo');
     }
 }
