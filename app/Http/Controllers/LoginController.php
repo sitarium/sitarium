@@ -36,7 +36,7 @@ class LoginController extends Controller
                     'host' => Request::server('HTTP_HOST'),
             ])->firstOrFail();
 
-            if (!Auth::user()->isAuthorizedOnWebsite($website)) {
+            if (! Auth::user()->isAuthorizedOnWebsite($website)) {
                 Auth::logout();
 
                 return Response::json([
