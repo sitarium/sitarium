@@ -3,8 +3,8 @@
 	{!! Asset::container('jquery')->show() !!}
 	{!! Asset::container('ajax-form')->show() !!}
 	
-	{!! Asset::container('fly-editor-bootstrap-workaround')->show() !!}
 	{!! Asset::container('fly-editor-bootstrap')->show() !!}
+	{!! Asset::container('fly-editor-bootstrap-workaround')->show() !!}
 	{!! Asset::container('bgpos')->show() !!}
 	
 	{!! Asset::container('fly-editor')->show() !!}
@@ -84,6 +84,7 @@
 	
 	<script	type="text/javascript">
 		+function($){
+			'use strict';
 			
 			$('#fly-editor_login_form').ajaxform({
 				locale: 'fr',
@@ -205,6 +206,7 @@
 	
 	<script	type="text/javascript">
 		+function($){
+			'use strict';
 
 			var $flyeditor = $.flyeditor({
 				root: '.fly-editor',

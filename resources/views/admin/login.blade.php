@@ -69,6 +69,7 @@
     
     <script type="text/javascript">
 		+function($){
+			'use strict';
 
 			$('#sitarium_login_form').ajaxform({
 				locale: 'fr',

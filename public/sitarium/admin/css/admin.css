@@ -28,3 +28,7 @@ body {
 .navbar-brand {
 	font-family: sonsie_oneregular, exo2, "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
+
+a .glyphicon {
+	padding-right: 5px;
+}

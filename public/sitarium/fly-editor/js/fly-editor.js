@@ -1,4 +1,5 @@
 +function ($) {
+	'use strict';
 	
 	//
 	function ID_Generator() {};
@@ -54,58 +55,48 @@
 			myFlyEditor.options.highlightApplier = rangy.createClassApplier("sitarium_highlight");
 		}
 		
-		// Animation of navigation bar
-		$("#fly-editor_navbar").animate({
-			minHeight: '50px',
-			height: '50px'
-		}, {
-			duration: 1000
-		});
-		$("body").animate({
-			paddingTop: '50px',
-			backgroundPositionY: '+=50px'
-		}, {
-			duration: 1000,
-			complete: function() {
-				// Initialization of editable/repeatable elements
-				myFlyEditor.options.editables = myFlyEditor.options.editables.add(myFlyEditor.options.repeatables.children());
-				myFlyEditor.make_editable(myFlyEditor.options.editables);
-				
-//				$('body').on('touchstart touchend touchcancel touchleave touchmove', function(event) {
-//					console.log(event);
-//				});
+		$.when(
+			myFlyEditor.animate_navbar()
+		)
+		.then(function() {
+			// Initialization of editable/repeatable elements
+			myFlyEditor.options.editables = myFlyEditor.options.editables.add(myFlyEditor.options.repeatables.children());
+			myFlyEditor.make_editable(myFlyEditor.options.editables);
+			
+//			$('body').on('touchstart touchend touchcancel touchleave touchmove', function(event) {
+//				console.log(event);
+//			});
 
-				// Text selection
-				$("body").on('mouseup keyup touchend touchcancel', function(event) {
-					if (rangy.getSelection().rangeCount > 0)
+			// Text selection
+			$("body").on('mouseup keyup touchend touchcancel', function(event) {
+				if (rangy.getSelection().rangeCount > 0)
+				{
+					var selection = rangy.getSelection().getRangeAt(0);
+					if (selection.toString() != '')
 					{
-						var selection = rangy.getSelection().getRangeAt(0);
-						if (selection.toString() != '')
+						var $element = $(selection.commonAncestorContainer);
+						var maxLevels = 10;
+						var currentLevel = 0;
+						while ($element.not("body") && currentLevel < maxLevels)
 						{
-							var $element = $(selection.commonAncestorContainer);
-							var maxLevels = 10;
-							var currentLevel = 0;
-							while ($element.not("body") && currentLevel < maxLevels)
-							{
-								if ($element.hasClass('fly-editor_editable')) {
-									if (typeof($element.data('bs.popover')) != 'undefined' && $element.data('bs.popover').tip() != 'undefined')
-									{
-										$element.data('bs.popover').tip().find('.fly-editor_highlight').removeAttr('disabled');
-									}
-									$frame = $("#fly-editor_frame_" + $element.data('fly-editor_id'));
-									break;
+							if ($element.hasClass('fly-editor_editable')) {
+								if (typeof($element.data('bs.popover')) != 'undefined' && $element.data('bs.popover').tip() != 'undefined')
+								{
+									$element.data('bs.popover').tip().find('.fly-editor_highlight').removeAttr('disabled');
 								}
-								$element = $element.parent();
-								currentLevel++;
+								$frame = $("#fly-editor_frame_" + $element.data('fly-editor_id'));
+								break;
 							}
-						}
-						else
-						{
-							$('.popover_container').find('.fly-editor_highlight').attr('disabled', 'disabled');
+							$element = $element.parent();
+							currentLevel++;
 						}
 					}
-				});
-			}
+					else
+					{
+						$('.popover_container').find('.fly-editor_highlight').attr('disabled', 'disabled');
+					}
+				}
+			});
 		});
 		
 		myFlyEditor.lastAction = new Date();
@@ -138,6 +129,25 @@
 		position_check: '.position_check',
 		highlightApplier: null
 	};
+	
+	FlyEditor.prototype.animate_navbar = function()
+	{
+		// Animation of navigation bar
+		$("#fly-editor_navbar").animate({
+			minHeight: '50px',
+			height: '50px'
+		}, {
+			duration: 400,
+			queue: false
+		});
+		$('*:not(.fly-editor *)').filter(function() {return $(this).css("position") === 'fixed' && $(this).position().top === 0;}).add("body").animate({
+			paddingTop: '50px',
+			backgroundPositionY: '+=50px'
+		}, {
+			duration: 400,
+			queue: false
+		});
+	}
 	
 	FlyEditor.prototype.add_frame = function($ref)
 	{
@@ -385,7 +395,7 @@
 	{
 		var myFlyEditor = this;
 
-		$ref = myFlyEditor.options.editables;
+		var $ref = myFlyEditor.options.editables;
 
 		if (refresh_popover == null) {
 			refresh_popover = true;
@@ -600,7 +610,7 @@
 	        }
 		});
 		
-		delete $clone;
+		$clone = null;
 		
 		return this;
 	};

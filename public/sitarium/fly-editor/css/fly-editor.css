@@ -28,6 +28,10 @@
 /* 	font-size: 14px; */
 }
 
+.fly-editor * {
+	text-transform: none;
+}
+	
 .fly-editor .close span {
 	font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
 }
@@ -64,6 +68,10 @@
 	font-family: sonsie_oneregular, exo2, "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
+.fly-editor .navbar-fixed-top {
+	padding: 0;
+}
+
 .fly-editor form {
 	border: none;
 	background-color: inherit;
@@ -91,6 +99,14 @@
 	margin: 0;
 	padding: 0;
 	border: 0;
+}
+
+.fly-editor .fa {
+	padding-right: 5px;
+}
+
+.fly-editor .glyphicon {
+	padding-right: 5px;
 }
 
 .fly-editor .dropzone .float-button {

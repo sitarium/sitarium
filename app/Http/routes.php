@@ -39,8 +39,10 @@ Route::group(['domain' => env('SITARIUM_ADMIN_WEBSITE')], function () {
 Route::get('/{page?}', 'DisplayController@show');
 
 // Routes for authentication
-Route::post('/sitarium/login', 'LoginController@login');
-Route::get('/sitarium/logout', 'LoginController@logout');
+// Route::post('/sitarium/login', 'LoginController@login');
+// Route::get('/sitarium/logout', 'LoginController@logout');
+Route::post('/sitarium/login', 'Auth\AuthController@login');
+Route::get('/sitarium/logout', 'Auth\AuthController@logout');
 
 
 
