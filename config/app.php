@@ -173,7 +173,7 @@ return [
 
     'aliases' => [
 
-       
+
         'App'       => Illuminate\Support\Facades\App::class,
         'Artisan'   => Illuminate\Support\Facades\Artisan::class,
         'Asset'     => Orchestra\Support\Facades\Asset::class,
