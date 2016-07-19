@@ -20,7 +20,7 @@ class TestsSeeder extends Seeder
                 'email' => 'demo@localhost.fr',
                 'active' => true,
             ]);
-            
+
             $user = User::where('email', 'admin@sitarium.fr')->firstOrFail();
             $user->websites()->save($website);
         });
