@@ -25,24 +25,6 @@
 				<div class="modal-body">
 					<form class="form-horizontal" role="form" id="fly-editor_login_form" action="/sitarium/login" method="post">
 						{{ csrf_field() }}
-<!-- 						<div class="form-group"> -->
-<!-- 							<div class="input-group"> -->
-<!-- 								<label for="inputEmail" class="control-label input-group-addon">Email</label> -->
-<!-- 								<input type="email" id="inputEmail" name="email" class="form-control" placeholder="your.email@address.com" required /> -->
-<!-- 							</div> -->
-<!-- 						</div> -->
-<!-- 						<div class="form-group"> -->
-<!-- 							<div class="input-group"> -->
-<!-- 								<label for="inputPassword" class="control-label input-group-addon">Mot de passe</label> -->
-<!-- 								<input type="password" id="inputPassword" name="password" class="form-control" placeholder="&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;" required /> -->
-<!-- 							</div> -->
-<!-- 						</div> -->
-<!-- 						<div class="checkbox"> -->
-<!-- 							<label for="inputRememberMe"> -->
-<!-- 								<input type="checkbox" id="inputRememberMe" name="remember-me" value="remember-me" />  -->
-<!-- 								Se souvenir de moi -->
-<!-- 							</label> -->
-<!-- 						</div> -->
                             <div class="form-group">
                                 <label class="col-md-4 control-label">E-Mail Address</label>
                                 <div class="col-md-6">
@@ -228,7 +210,8 @@
 				$('#sitarium_logout_modal').modal();
 			});
 
-			$('.sitarium_disconnection_link')
+			$('.sitarium_connection_link')
+				.html('Déconnexion')
 				.click(function(event) {
 					event.preventDefault();
 					$("#sitarium_logout_modal").modal();
