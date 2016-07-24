@@ -96,10 +96,9 @@
 		<div class="container-fluid">
 			<div class="navbar-header">
 				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-fly-editor-navbar-collapse-1">
-					<span class="sr-only">Ouvrir/Fermer</span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
+					<span class="sr-only">Toggle navigation</span>
+					Menu
+					<span class="glyphicon glyphicon-menu-hamburger"></span>
 				</button>
 				<a href="#" class="navbar-brand">Sitarium</a>
 			</div>
@@ -107,14 +106,14 @@
 				<div class="navbar-element">
 					<!-- Open button -->
 					<button id="sitarium_open_file_button" type="button" class="btn navbar-btn btn-primary power-button">
-						<span class="glyphicon glyphicon glyphicon-folder-open"></span>
+						<span class="glyphicon glyphicon-folder-open"></span>
 						Ouvrir
 					</button>
 				</div>
 				<div class="navbar-element navbar-right">
 					<!-- Logout button -->
 					<button id="sitarium_logout_button" type="button" class="btn navbar-btn btn-primary power-button">
-						<span class="glyphicon glyphicon glyphicon glyphicon-off"></span>
+						<span class="glyphicon glyphicon-off"></span>
 						Se déconnecter
 					</button>
 				</div>

@@ -51,6 +51,16 @@
 	margin: 5px 0 0 0;
 }
 
+.fly-editor .navbar-toggle {
+	line-height: .713;
+	text-transform: uppercase;
+}
+
+.fly-editor .burger-menu {
+	padding-left: 5px;
+	display: inline-block;
+}
+
 .fly-editor .container-fluid {
 	padding: 0;
 }
