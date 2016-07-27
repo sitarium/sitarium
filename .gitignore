@@ -8,5 +8,3 @@ composer.lock
 .buildpath
 
 /public/.ovhconfig
-/public/sitarium/jquery
-/public/sitarium/jungle-gecko
