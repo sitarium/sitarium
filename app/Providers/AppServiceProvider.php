@@ -19,6 +19,7 @@ class AppServiceProvider extends ServiceProvider
             base_path('vendor/components/jquery')       => base_path('public/sitarium/jquery'),
             base_path('vendor/components/bootstrap')    => base_path('public/sitarium/bootstrap'),
             base_path('vendor/jungle-gecko/ajax-form')  => base_path('public/sitarium/jungle-gecko/ajax-form'),
+            base_path('vendor/jungle-gecko/button-switch')  => base_path('public/sitarium/jungle-gecko/button-switch'),
         ], 'assets');
 
         // Jquery
@@ -31,6 +32,9 @@ class AppServiceProvider extends ServiceProvider
         // Ajax Form
         Asset::container('ajax-form')->add('ajax-form', 'sitarium/jungle-gecko/ajax-form/css/ajax-form.css');
         Asset::container('ajax-form')->add('ajax-form', 'sitarium/jungle-gecko/ajax-form/js/ajax-form.js');
+
+        // Button Switch
+        Asset::container('button-switch')->add('button-switch', 'sitarium/jungle-gecko/button-switch/js/button-switch.js');
 
         // Admin
         Asset::container('admin')->add('admin', 'sitarium/admin/css/admin.css');

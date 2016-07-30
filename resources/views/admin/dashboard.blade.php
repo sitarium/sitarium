@@ -17,7 +17,9 @@
         
             <div class="col-md-10 col-md-offset-1">
                 <div class="panel panel-default">
-                    <div class="panel-heading">Websites</div>
+                    <div class="panel-heading">
+                    	Websites
+                    </div>
                     	@forelse ($websites as $website)
                     		@if ($website == $websites->first())
                         		<table class="table">
@@ -31,8 +33,8 @@
                     		@endif
                     				<tr>
                     					<td>{{ $website->id }}</td>
-                    					<td>{{ $website->name }}</td>
-                    					<td>{{ $website->host }}</td>
+                    					<td><a href="{{ url('/admin/website', $website->id) }}">{{ $website->name }}</a></td>
+                    					<td><a href="{{ url('/admin/website', $website->id) }}">{{ $website->host }}</a></td>
                     					<td>{{ $website->email }}</td>
                     					<td>{{ $website->active ? 'Yes' : 'No' }}</td>
                     				</tr>
@@ -44,11 +46,15 @@
                                 No website registered.
                             </div>
                         @endforelse
-                    </ul>
+                    <div class="panel-footer">
+            			<a class="btn btn-sm btn-primary" href="{{ url('/admin/website') }}" role="button">Add a website</a>
+                    </div>
                 </div>
                 
                 <div class="panel panel-default">
-                    <div class="panel-heading">Users</div>
+                    <div class="panel-heading">
+                    	Users
+                    </div>
                     	@forelse ($users as $user)
                     		@if ($user == $users->first())
                         		<table class="table">
@@ -61,8 +67,8 @@
                     		@endif
                     				<tr>
                     					<td>{{ $user->id }}</td>
-                    					<td>{{ $user->name }}</td>
-                    					<td>{{ $user->email }}</td>
+                    					<td><a href="{{ url('/admin/user', $user->id) }}">{{ $user->name }}</a></td>
+                    					<td><a href="{{ url('/admin/user', $user->id) }}">{{ $user->email }}</a></td>
                     					<td>{{ $user->admin ? 'Yes' : 'No' }}</td>
                     				</tr>
                     		@if ($user == $users->last())
@@ -73,7 +79,9 @@
                                 No website registered.
                             </div>
                         @endforelse
-                    </ul>
+                    <div class="panel-footer">
+                    	<a class="btn btn-sm btn-primary href="{{ url('/admin/user') }}" role="button">Add a user</a>
+                    </div>
                 </div>
             </div>
         </div>

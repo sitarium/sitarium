@@ -33,7 +33,7 @@
                 <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#app-navbar-collapse">
 					<span class="sr-only">Toggle navigation</span>
 					Menu
-					<span class="glyphicon glyphicon-xs glyphicon-menu-hamburger"></span>
+					<span class="glyphicon glyphicon-menu-hamburger"></span>
                 </button>
 
                 <!-- Branding Image -->

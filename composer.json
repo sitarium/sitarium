@@ -12,7 +12,9 @@
         "orchestra/asset": "~3.0",
         "components/jquery": "2.2.*",
         "components/bootstrap": "3.3.*",
-        "jungle-gecko/ajax-form": "1.0.*"
+        "laravelcollective/html": "5.2.*",
+        "jungle-gecko/ajax-form": "1.0.*",
+        "jungle-gecko/button-switch": "1.0.*"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
