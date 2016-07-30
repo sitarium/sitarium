@@ -1,4 +1,6 @@
-<?php namespace App\Http\Requests;
+<?php
+
+namespace App\Http\Requests;
 
 use Auth;
 use Illuminate\Foundation\Http\FormRequest;
@@ -14,7 +16,7 @@ class WebsiteFormRequest extends FormRequest
                 'name' => 'required',
                 'host' => 'required|unique:websites,host,'.$this->input('id'),
                 'email' => 'required|email',
-                'active' => 'required'
+                'active' => 'required',
             ], $this->messages(), $this->attributes()
         );
     }
@@ -29,12 +31,12 @@ class WebsiteFormRequest extends FormRequest
     {
         // If you want to customize what happens on a failed validation,
         // override this method.
-        // See what it does natively here: 
+        // See what it does natively here:
         // https://github.com/laravel/framework/blob/master/src/Illuminate/Foundation/Http/FormRequest.php
-    	return Response::json(array(
-    			'code' => 1,
-    			'message' => 'Nous avons rencontré un souci :-(',
-    			'errors' => $errors
-    	));
+        return Response::json([
+                'code' => 1,
+                'message' => 'Nous avons rencontré un souci :-(',
+                'errors' => $errors,
+        ]);
     }
 }

@@ -39,7 +39,7 @@ class AdminController extends Controller
     public function showWebsiteForm($id = null)
     {
         $website = Website::findOrNew($id);
-        
+
         return view('admin/website')->with(compact('website'));
     }
 
@@ -51,48 +51,47 @@ class AdminController extends Controller
     public function saveWebsite(WebsiteFormRequest $request)
     {
         $website = Website::updateOrCreate(['id' => $request->input('id')], $request->all());
-        
+
         if (! $website) {
-            return Response::json(array(
+            return Response::json([
                 'code' => 1,
-                'message' => 'Failed to save website.'
-            ));
+                'message' => 'Failed to save website.',
+            ]);
         }
-        
-        return Response::json(array(
+
+        return Response::json([
             'code' => 0,
             'message' => 'Website saved.',
             'callback_vars' => [
-                'id' => $website->id
-            ]
-        ));
+                'id' => $website->id,
+            ],
+        ]);
     }
-    
+
     /**
-     * Delete a website
-     * 
+     * Delete a website.
+     *
      * @return \Illuminate\Http\Response
      */
     public function deleteWebsite()
     {
         $id = Request::input('id');
-        
+
         $website = Website::findOrFail($id);
-        
+
         if (! $website->delete()) {
-            return Response::json(array(
+            return Response::json([
                 'code' => 1,
-                'message' => 'Failed to delete website.'
-            ));
+                'message' => 'Failed to delete website.',
+            ]);
         }
-        
-        return Response::json(array(
+
+        return Response::json([
             'code' => 0,
             'message' => 'Website deleted.',
             'callback_vars' => [
-                'redirect_url' => url('admin')
-            ]
-        ));
-        
+                'redirect_url' => url('admin'),
+            ],
+        ]);
     }
 }

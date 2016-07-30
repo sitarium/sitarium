@@ -33,7 +33,7 @@ Route::group(['domain' => env('SITARIUM_ADMIN_WEBSITE')], function () {
 
     // Admin page
     Route::get('/admin', 'AdminController@index');
-    
+
     // Website page
     Route::post('/admin/website/delete', 'AdminController@deleteWebsite');
     Route::get('/admin/website/{id?}', 'AdminController@showWebsiteForm');
