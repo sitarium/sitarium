@@ -162,6 +162,14 @@ class AdminController extends Controller
     public function deleteUser()
     {
         $id = Request::input('id');
+        
+        if (intval($id) === Auth::user()->id)
+        {
+            return Response::json([
+                'code' => 1,
+                'message' => 'You cannot delete yourself!',
+            ]);
+        }
 
         $user = User::findOrFail($id);
 

@@ -61,33 +61,37 @@
                 </div>
                 
                 
+        		@if (intval($user->id) !== Auth::user()->id)
             
-                <div class="panel panel-danger hidden" id="delete_panel">
-                    <div class="panel-heading">
-                		<a data-toggle="collapse" href="#collapse_danger" class=" text-danger">
-                        	Danger zone	
-                    	</a>
-                    </div>
-                    <div id="collapse_danger" class="panel-collapse collapse">
-                    	<div class="panel-body">
-                    	
-        					{!! Form::open(['url' => '/admin/user', 'method' => 'delete', 'id' => 'delete_form', 'class' => 'form-horizontal', 'role' => 'form']) !!}
-        				
-        						{!! Form::hidden('id', $user->id) !!}
-                
-                                <div class="form-group">
-                                    <div class="text-center">
-                                        <button type="submit" class="btn btn-danger">
-                                            <i class="fa fa-btn fa-delete"></i>Delete user
-                                        </button>
+                    <div class="panel panel-danger hidden" id="delete_panel">
+                        <div class="panel-heading">
+                    		<a data-toggle="collapse" href="#collapse_danger" class=" text-danger">
+                            	Danger zone	
+                        	</a>
+                        </div>
+                        <div id="collapse_danger" class="panel-collapse collapse">
+                        	<div class="panel-body">
+                        	
+            					{!! Form::open(['url' => '/admin/user', 'method' => 'delete', 'id' => 'delete_form', 'class' => 'form-horizontal', 'role' => 'form']) !!}
+            				
+            						{!! Form::hidden('id', $user->id) !!}
+                    
+                                    <div class="form-group">
+                                        <div class="text-center">
+                                            <button type="submit" class="btn btn-danger">
+                                                <i class="fa fa-btn fa-delete"></i>Delete user
+                                            </button>
+                                        </div>
                                     </div>
-                                </div>
-        
-                        	{!! Form::close() !!}
-                        
-                    	</div>
+            
+                            	{!! Form::close() !!}
+                            
+                        	</div>
+                        </div>
                     </div>
-                </div>
+                    
+				@endif
+				
             </div>
                 
             </div>
