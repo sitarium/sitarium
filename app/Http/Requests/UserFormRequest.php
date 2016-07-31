@@ -7,16 +7,15 @@ use Illuminate\Foundation\Http\FormRequest;
 use Response;
 use Validator;
 
-class WebsiteFormRequest extends FormRequest
+class UserFormRequest extends FormRequest
 {
     public function validator($factory)
     {
         return $factory->make(
             $this->all(), [
                 'name' => 'required',
-                'host' => 'required|unique:websites,host,'.$this->input('id'),
-                'email' => 'required|email',
-                'active' => 'required',
+                'email' => 'required|email|unique:users,email,'.$this->input('id'),
+                'admin' => 'required',
             ], $this->messages(), $this->attributes()
         );
     }

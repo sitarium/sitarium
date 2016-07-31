@@ -7,75 +7,43 @@
             
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                    	Website infos
+                    	User infos
                     </div>
                     
                     <div class="panel-body">
                 
-        				{!! Form::model($website, ['url' => '/admin/website', 'id' => 'website_form', 'class' => 'form-horizontal', 'role' => 'form']) !!}
+        				{!! Form::model($user, ['url' => '/admin/user', 'id' => 'user_form', 'class' => 'form-horizontal', 'role' => 'form']) !!}
         				
-                    		<input type="hidden" name="id" value="{{ $website->id }}">
+                    		<input type="hidden" name="id" value="{{ $user->id }}">
             
-                            <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
+                            <div class="form-group">
                                 <label class="col-md-4 control-label">Name</label>
         
                                 <div class="col-md-6">
                                     {!! Form::text('name', null, ['class' => 'form-control']) !!}
-        
-                                    @if ($errors->has('name'))
-                                        <span class="help-block">
-                                            <strong>{{ $errors->first('name') }}</strong>
-                                        </span>
-                                    @endif
                                 </div>
                             </div>
             
-                            <div class="form-group{{ $errors->has('host') ? ' has-error' : '' }}">
-                                <label class="col-md-4 control-label">Host</label>
-        
-                                <div class="col-md-6">
-        							{!! Form::text('host', null, ['class' => 'form-control']) !!}
-        							
-                                    @if ($errors->has('host'))
-                                        <span class="help-block">
-                                            <strong>{{ $errors->first('host') }}</strong>
-                                        </span>
-                                    @endif
-                                </div>
-                            </div>
-            
-                            <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
+                            <div class="form-group">
                                 <label class="col-md-4 control-label">E-Mail Address</label>
         
                                 <div class="col-md-6">
                                     {!! Form::text('email', null, ['class' => 'form-control']) !!}
-        
-                                    @if ($errors->has('email'))
-                                        <span class="help-block">
-                                            <strong>{{ $errors->first('email') }}</strong>
-                                        </span>
-                                    @endif
                                 </div>
                             </div>
             
-                            <div class="form-group{{ $errors->has('active') ? ' has-error' : '' }}">
-                                <label class="col-md-4 control-label">Active</label>
+                            <div class="form-group">
+                                <label class="col-md-4 control-label">Admin</label>
         
                                 <div class="col-md-6">
                                 	<div class="btn-group button-switch" data-toggle="buttons">
                                         <label class="btn btn-default" data-active-class="btn-success" data-inactive-class="btn-default">
-                                        	{!!  Form::radio('active', 1, ['autocomplete' => 'off']); !!} Active
+                                        	{!!  Form::radio('admin', 1, ['autocomplete' => 'off']); !!} Yes
                                         </label>
                                         <label class="btn btn-default" data-active-class="btn-danger" data-inactive-class="btn-default">
-                                        	{!!  Form::radio('active', 0, ['autocomplete' => 'off']); !!} Inactive
+                                        	{!!  Form::radio('admin', 0, ['autocomplete' => 'off']); !!} No
                                         </label>
             						</div>
-        
-                                    @if ($errors->has('active'))
-                                        <span class="help-block">
-                                            <strong>{{ $errors->first('active') }}</strong>
-                                        </span>
-                                    @endif
                                 </div>
                             </div>
             
@@ -90,8 +58,9 @@
                         {!! Form::close() !!}
                         
                		</div>
-                
                 </div>
+                
+                
             
                 <div class="panel panel-danger hidden" id="delete_panel">
                     <div class="panel-heading">
@@ -102,14 +71,14 @@
                     <div id="collapse_danger" class="panel-collapse collapse">
                     	<div class="panel-body">
                     	
-        					{!! Form::open(['url' => '/admin/website/delete', 'id' => 'delete_form', 'class' => 'form-horizontal', 'role' => 'form']) !!}
+        					{!! Form::open(['url' => '/admin/user', 'method' => 'delete', 'id' => 'delete_form', 'class' => 'form-horizontal', 'role' => 'form']) !!}
         				
-                        		<input type="hidden" name="id" value="{{ $website->id }}">
+        						{!! Form::hidden('id', $user->id) !!}
                 
                                 <div class="form-group">
                                     <div class="text-center">
                                         <button type="submit" class="btn btn-danger">
-                                            <i class="fa fa-btn fa-delete"></i>Delete website
+                                            <i class="fa fa-btn fa-delete"></i>Delete user
                                         </button>
                                     </div>
                                 </div>
@@ -133,18 +102,18 @@
 	<script type="text/javascript">
     	+function($){
 
-			if ($('#website_form').find('input[name="id"]').val() === "") {
+			if ($('#user_form').find('input[name="id"]').val() === "") {
         		$('#delete_panel').hide();
 			}
     		$('#delete_panel').removeClass('hidden');
 
     		$('.button-switch').buttonswitch();
 
-    		$('#website_form').ajaxform({
+    		$('#user_form').ajaxform({
         		locale: 'fr',
         		resetOnSuccess: false,
         		callback: function(callback_vars) {
-        			$('#website_form, #delete_form').find('input[name="id"]').val(callback_vars.id);
+        			$('#user_form, #delete_form').find('input[name="id"]').val(callback_vars.id);
         			$('#delete_panel').slideDown();
         		}
     		});
@@ -161,12 +130,6 @@
         		}
     		});
 
-//     		function initPage() {
-// 				if ($('#website_form').find('input[name="id"]').val() !== "") {
-// 					$('#delete_panel').slideUp();
-// 				}
-//     		};
-    		
     	}(jQuery);
 	</script>
 	
