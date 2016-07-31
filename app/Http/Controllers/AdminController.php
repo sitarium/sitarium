@@ -29,13 +29,13 @@ class AdminController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {        
+    {
         return view('admin/dashboard');
     }
-    
+
     /**
-     * Returns a paginated list of websites
-     * 
+     * Returns a paginated list of websites.
+     *
      * @return \Illuminate\Http\Response
      */
     public function paginateWebsites()
@@ -106,10 +106,10 @@ class AdminController extends Controller
             ],
         ]);
     }
-    
+
     /**
-     * Returns a paginated list of users
-     * 
+     * Returns a paginated list of users.
+     *
      * @return \Illuminate\Http\Response
      */
     public function paginateUsers()
