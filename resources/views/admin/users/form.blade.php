@@ -60,6 +60,15 @@
                		</div>
                 </div>
                 
+                <div class="panel panel-default" id="websites_panel">
+                    <div class="panel-heading">
+                    	Websites
+                    </div>
+                    <div class="content"></div>
+                    <div class="panel-footer">
+            			<a class="btn btn-sm btn-primary" href="{{ url('/admin/website') }}" role="button">Add a website</a>
+                    </div>
+                </div>
                 
         		@if (intval($user->id) !== Auth::user()->id)
             
@@ -107,9 +116,9 @@
     	+function($){
 
 			if ($('#user_form').find('input[name="id"]').val() === "") {
-        		$('#delete_panel').hide();
+        		$('#websites_panel, #delete_panel').hide();
 			}
-    		$('#delete_panel').removeClass('hidden');
+    		$('#websites_panel, #delete_panel').removeClass('hidden');
 
     		$('.button-switch').buttonswitch();
 
@@ -118,7 +127,9 @@
         		resetOnSuccess: false,
         		callback: function(callback_vars) {
         			$('#user_form, #delete_form').find('input[name="id"]').val(callback_vars.id);
+        			getWebsites();
         			$('#delete_panel').slideDown();
+        			$('#websites_panel').slideDown();
         		}
     		});
 
@@ -133,6 +144,30 @@
 					setTimeout('window.location.replace("' + callback_vars.redirect_url + '")', 2000);
         		}
     		});
+    		
+        	function getWebsites(page) {
+            	var url = '/admin/websites/' + $('#user_form').find('input[name="id"]').val();
+            	if (page != null && page != "undefined") {
+					url += '?page=' + page;
+            	}
+            	
+                $.ajax({
+                    url: url,
+                    dataType: 'json',
+                }).done(function (data) {
+                    $('#websites_panel').find('.pagination_links').remove();
+                    $('#websites_panel').find('.content').replaceWith(data);
+                    
+                	$('#websites_panel').find('.pagination a').on('click', function (event) {
+                        event.preventDefault();
+                        getWebsites($(this).attr('href').split('page=')[1]);
+                    });
+                }).fail(function () {
+                	$('#websites_panel').find('.content').replaceWith('<div class="content panel-body alert-danger" role="alert">Websites could not be loaded.</div>');
+                });
+            };
+
+            getWebsites();
 
     	}(jQuery);
 	</script>
