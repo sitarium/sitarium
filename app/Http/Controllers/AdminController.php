@@ -41,16 +41,17 @@ class AdminController extends Controller
     public function paginateWebsites($user = null)
     {
         $websites = Website::paginate(2);
-        
+
         if ($user != null) {
             $websites->map(function ($website, $key) use ($user) {
                 $website->authorized = $website->users->contains(function ($key, $value) use ($user) {
                     return $value->id == intval($user);
                 });
+
                 return $website;
             });
         }
-        
+
         return Response::json(View::make('admin.websites.page')->with(compact('websites', 'user'))->render());
     }
 
@@ -198,25 +199,22 @@ class AdminController extends Controller
             ],
         ]);
     }
-    
+
     /**
      * Authorize a user on a website.
-     * 
+     *
      * @return \Illuminate\Http\Response
      */
     public function authorizeUserWebsite()
     {
         $user = User::findOrFail(Request::input('userId'));
-        
-        if (Request::input('authorized') == true) 
-        {
+
+        if (Request::input('authorized') == true) {
             $user->websites()->attach(Request::input('websiteId'));
-        }
-        else
-        {
+        } else {
             $user->websites()->detach(Request::input('websiteId'));
         }
-        
+
         return Response::json([
             'code' => 0,
             'message' => 'Saved.',
