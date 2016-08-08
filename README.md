@@ -1,11 +1,11 @@
 # SITARIUM
 
 [![StyleCI](https://styleci.io/repos/60374517/shield?style=flat)](https://styleci.io/repos/60374517)
-[![Build Status](https://travis-ci.org/sitarium/sitarium.svg)](https://travis-ci.org/sitarium/sitarium)
-[![Latest Stable Version](https://poser.pugx.org/sitarium/sitarium/v/stable)](https://packagist.org/packages/sitarium/sitarium)
-[![Total Downloads](https://poser.pugx.org/sitarium/sitarium/downloads)](https://packagist.org/packages/sitarium/sitarium)
-[![Latest Unstable Version](https://poser.pugx.org/sitarium/sitarium/v/unstable)](https://packagist.org/packages/sitarium/sitarium)
-[![License](https://poser.pugx.org/sitarium/sitarium/license)](https://packagist.org/packages/sitarium/sitarium)
+[![Build Status](https://travis-ci.org/jungle-gecko/sitarium.svg)](https://travis-ci.org/jungle-gecko/sitarium)
+[![Latest Stable Version](https://poser.pugx.org/jungle-gecko/sitarium/v/stable)](https://packagist.org/packages/jungle-gecko/sitarium)
+[![Total Downloads](https://poser.pugx.org/jungle-gecko/sitarium/downloads)](https://packagist.org/packages/jungle-gecko/sitarium)
+[![Latest Unstable Version](https://poser.pugx.org/jungle-gecko/sitarium/v/unstable)](https://packagist.org/packages/jungle-gecko/sitarium)
+[![License](https://poser.pugx.org/jungle-gecko/sitarium/license)](https://packagist.org/packages/jungle-gecko/sitarium)
 
 Sitarium is a web application to host simple websites and offer an easy to edit for non experts. No need for a complex admin interface or back office. Sitarium is the new What you edit is what you get!
 
@@ -20,7 +20,7 @@ Sitarium is built on the beautiful Laravel framework and has only few requiremen
 
 ### Step 1: Deploy Sitarium source code
 
-Easy task: just rely on Composer and run the command `composer create-project sitarium/sitarium MySitarium` to download the source code and all the dependencies.
+Easy task: just rely on Composer and run the command `composer create-project jungle-gecko/sitarium MySitarium` to download the source code and all the dependencies.
 
 Set the `/MySitarium/public` folder as the Document Root of your webserver (or virtual host).
 
