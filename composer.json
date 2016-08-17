@@ -13,7 +13,7 @@
         "components/jquery": "2.2.*",
         "components/bootstrap": "3.3.*",
         "laravelcollective/html": "5.2.*",
-        "jungle-gecko/ajax-form": "1.0.*",
+        "jungle-gecko/ajax-form": "2.0.*",
         "jungle-gecko/button-switch": "1.0.*"
     },
     "require-dev": {

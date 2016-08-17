@@ -74,7 +74,12 @@
                		</div>
                 </div>
                 
-                
+                <div class="panel panel-default" id="users_panel">
+                    <div class="panel-heading">
+                    	Users
+                    </div>
+                    <div class="content"></div>
+                </div>
             
                 <div class="panel panel-danger hidden" id="delete_panel">
                     <div class="panel-heading">
@@ -116,10 +121,10 @@
 	<script type="text/javascript">
     	+function($){
 
-			if ($('#website_form').find('input[name="id"]').val() === "") {
-        		$('#delete_panel').hide();
+			if ($('#user_form').find('input[name="id"]').val() === "") {
+        		$('#users_panel, #delete_panel').hide();
 			}
-    		$('#delete_panel').removeClass('hidden');
+    		$('#users_panel, #delete_panel').removeClass('hidden');
 
     		$('.button-switch').buttonswitch();
 
@@ -128,7 +133,9 @@
         		resetOnSuccess: false,
         		callback: function(callback_vars) {
         			$('#website_form, #delete_form').find('input[name="id"]').val(callback_vars.id);
+        			getUsers();
         			$('#delete_panel').slideDown();
+        			$('#users_panel').slideDown();
         		}
     		});
 
@@ -143,6 +150,30 @@
 					setTimeout('window.location.replace("' + callback_vars.redirect_url + '")', 2000);
         		}
     		});
+    		
+        	function getUsers(page) {
+            	var url = '/admin/users/' + $('#website_form').find('input[name="id"]').val();
+            	if (page != null && page != "undefined") {
+					url += '?page=' + page;
+            	}
+            	
+                $.ajax({
+                    url: url,
+                    dataType: 'json',
+                }).done(function (data) {
+                    $('#users_panel').find('.pagination_links').remove();
+                    $('#users_panel').find('.content').replaceWith(data);
+                    
+                	$('#users_panel').find('.pagination a').on('click', function (event) {
+                        event.preventDefault();
+                        getUsers($(this).attr('href').split('page=')[1]);
+                    });
+                }).fail(function () {
+                	$('#users_panel').find('.content').replaceWith('<div class="content panel-body alert-danger" role="alert">Users could not be loaded.</div>');
+                });
+            };
+
+            getUsers();
 
     	}(jQuery);
 	</script>

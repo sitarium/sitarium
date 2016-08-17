@@ -73,13 +73,15 @@
 
 			$('#sitarium_login_form').ajaxform({
 				locale: 'fr',
-				callback: function(callback_vars) {
-					var redirect_url = '/admin';
-					if (callback_vars !== 'undefined' && callback_vars.redirect_url !== 'undefined')
-					{
-						redirect_url = callback_vars.redirect_url;
+				callbacks: {
+					success: function(myAjaxForm, callback_vars) {
+						var redirect_url = '/admin';
+						if (callback_vars !== 'undefined' && callback_vars.redirect_url !== 'undefined')
+						{
+							redirect_url = callback_vars.redirect_url;
+						}
+						setTimeout('window.location.replace("' + callback_vars.redirect_url + '")', 2000);
 					}
-					setTimeout('window.location.replace("' + callback_vars.redirect_url + '")', 2000);
 				}
 			});
 			

@@ -2,13 +2,13 @@
 	@if ($website == $websites->first())
 		<table class="content table">
 			<tr>
-    			<th>Id</th>
-    			<th>Name</th>
-    			<th>Host</th>
-    			<th>Email</th>
-    			<th>Active</th>
+    			<th class="col-md-1">Id</th>
+    			<th class="col-md-2">Name</th>
+    			<th class="col-md-2">Host</th>
+    			<th class="col-md-3">Email</th>
+    			<th class="col-md-1">Active</th>
 		@if (isset($user) && $user != null)
-				<th>Authorized</th>
+				<th class="col-md-3">Authorized</th>
 		@endif
     		</tr>
 	@endif
@@ -30,11 +30,18 @@
                             <label class="btn btn-default" data-active-class="btn-success" data-inactive-class="btn-default">
                             	{!!  Form::radio('authorized', 1, $website->authorized, ['autocomplete' => 'off']); !!} Yes
                             </label>
+                            <label class="btn btn-success ajax-form_success_placeholder">
+								<span class="glyphicon glyphicon-ok"></span>
+								<span class="ajax-form_message"></span>
+                            </label>
+                            <label class="btn btn-danger disabled ajax-form_error_placeholder">
+								<span class="glyphicon glyphicon-ok"></span>
+								<span class="ajax-form_message"></span>
+                            </label>
                             <label class="btn btn-default" data-active-class="btn-danger" data-inactive-class="btn-default">
                             	{!!  Form::radio('authorized', 0, ! $website->authorized, ['autocomplete' => 'off']); !!} No
                             </label>
 						</div>
-						<span class="form_result"></span>
                     {!! Form::close() !!}
                 </td>
 	@endif
@@ -58,62 +65,54 @@
 	<script type="text/javascript">
     	+function($){
         	'use strict';
-        	
+
     		$('.authorize_form').each(function() {
         		
 				var $form = $(this);
     			var $buttonSwitch = $('.button-switch').buttonswitch();
-        		
-    			$form.find('input').change(function() { 
-    
-        			var $input = $(this);
-        			var data = serialize($form);
-        			
-                	$.ajax({
-    					type: $form.attr('method') || 'post',
-    					url: $form.attr('action'),
-    					data: data,
-    					dataType: "json"
-    				}).done(function(result) {
-    					if (typeof result.code !== 'undefined')
-    					{
-    						$form.find('.form_result').html(result.message);
-    						setTimeout(function() { $form.find('.form_result').html('') }, 2000);
+
+    			$form.ajaxform({
+    				locale: 'fr',
+    				resetOnSuccess: false,
+    				placeholders: {
+        				error: '.ajax-form_error_placeholder',
+        				success: '.ajax-form_success_placeholder',
+    				},
+    				transitions: {
+						show: function($placeholder) {
+							$placeholder.css('opacity', 0).animate(
+								{ opacity: 1, width: 'toggle' },
+								{ queue: false }
+							);
+						},
+    					hide: function($placeholder) {
+    						$placeholder.animate(
+    							{ opacity: 0, width:'hide' },
+    							{ queue: false }
+    						);
     					}
-    					else
-    					{
-    						$form.find('.form_result').html('Error processing.');
+    				},
+    				callbacks: {
+        				success: function(myAjaxForm) {
+    						setTimeout(function() {
+        						myAjaxForm.clearAllAlerts();
+							}, 2000);
+        					$buttonSwitch.refresh();
+        				},
+        				error: function() {
         					$form[0].reset();
         					$buttonSwitch.refresh();
-    					}
-                    }).fail(function () {
-    					$form.find('.form_result').html('Error submitting.');
-    					$form[0].reset();
-    					$buttonSwitch.refresh();
-                    });
-                        
+        				}
+    				},
+    				init: function() {
+    					$form.find('.ajax-form_success_placeholder, .ajax-form_error_placeholder').hide().removeClass('hidden');
+    				}
+    			});
+        		
+    			$form.find('input').change(function() {   
+    				$form.submit();
         		});
     		});
-
-    		var serialize = function(form)
-    		{
-    		    var o = {};
-    		    var a = form.serializeArray();
-    		    $.each(a, function()
-    		    {
-    		        if (o[this.name] !== undefined)
-    		        {
-    		            if (!o[this.name].push)
-    		            {
-    		                o[this.name] = [o[this.name]];
-    		            }
-    		            o[this.name].push(this.value || '');
-    		        } else {
-    		            o[this.name] = this.value || '';
-    		        }
-    		    });
-    		    return o;
-    		};
     		
     	}(jQuery);
 	</script>

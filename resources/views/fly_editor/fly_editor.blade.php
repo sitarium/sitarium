@@ -70,8 +70,10 @@
 			
 			$('#fly-editor_login_form').ajaxform({
 				locale: 'fr',
-				callback: function() {
-					setTimeout('window.location.reload(true)', 2000);
+				callbacks: {
+					success: function() {
+						setTimeout('window.location.reload(true)', 2000);
+					}
 				}
 			});
 			

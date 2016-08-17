@@ -65,9 +65,6 @@
                     	Websites
                     </div>
                     <div class="content"></div>
-                    <div class="panel-footer">
-            			<a class="btn btn-sm btn-primary" href="{{ url('/admin/website') }}" role="button">Add a website</a>
-                    </div>
                 </div>
                 
         		@if (intval($user->id) !== Auth::user()->id)

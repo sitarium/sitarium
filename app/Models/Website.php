@@ -47,6 +47,11 @@ class Website extends Model
         return $this->belongsToMany('\App\Models\User');
     }
 
+    public function isUserAuthorized($user)
+    {
+        return collect($this->users)->contains('name', $user->name);
+    }
+
     /*
      * Functions linked to files
      */

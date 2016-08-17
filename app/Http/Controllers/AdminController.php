@@ -124,9 +124,21 @@ class AdminController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function paginateUsers()
+    public function paginateUsers($website = null)
     {
-        return Response::json(View::make('admin.users.page')->with(['users' => User::paginate(2)])->render());
+        $users = User::paginate(2);
+
+        if ($website != null) {
+            $users->map(function ($user, $key) use ($website) {
+                $user->authorized = $user->websites->contains(function ($key, $value) use ($website) {
+                    return $value->id == intval($website);
+                });
+
+                return $user;
+            });
+        }
+
+        return Response::json(View::make('admin.users.page')->with(compact('users', 'website'))->render());
     }
 
     /**

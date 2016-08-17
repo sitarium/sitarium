@@ -76,13 +76,15 @@
 
 			$('#password_reset_form').ajaxform({
 				locale: 'fr',
-				callback: function(callback_vars) {
-					var redirect_url = '/';
-					if (callback_vars !== 'undefined' && callback_vars.redirect_url !== 'undefined')
-					{
-						redirect_url = callback_vars.redirect_url;
-					}
-					setTimeout('window.location.replace("' + redirect_url + '");', 2000);
+				callbacks: {
+					success: function(callback_vars) {
+    					var redirect_url = '/';
+    					if (callback_vars !== 'undefined' && callback_vars.redirect_url !== 'undefined')
+    					{
+    						redirect_url = callback_vars.redirect_url;
+    					}
+    					setTimeout('window.location.replace("' + redirect_url + '");', 2000);
+    				}
 				}
 			});
 			
