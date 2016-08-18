@@ -107,14 +107,22 @@
 			<div class="collapse navbar-collapse" id="bs-fly-editor-navbar-collapse-1">
 				<div class="navbar-element">
 					<!-- Open button -->
-					<button id="sitarium_open_file_button" type="button" class="btn navbar-btn btn-primary power-button">
+					<button id="sitarium_open_file_button" type="button" class="btn navbar-btn btn-primary">
 						<span class="glyphicon glyphicon-folder-open"></span>
 						Ouvrir
 					</button>
 				</div>
+				<div class="navbar-element">
+					<!-- Save button -->
+					<div class="btn-group">
+    					<button id="sitarium_save_file_button" type="button" class="btn navbar-btn btn-primary">
+    						<span class="glyphicon glyphicon glyphicon-cloud-upload"></span> Enregistrer
+    					</button>
+					</div>
+				</div>
 				<div class="navbar-element navbar-right">
 					<!-- Logout button -->
-					<button id="sitarium_logout_button" type="button" class="btn navbar-btn btn-primary power-button">
+					<button id="sitarium_logout_button" type="button" class="btn navbar-btn btn-primary">
 						<span class="glyphicon glyphicon-off"></span>
 						Se déconnecter
 					</button>
@@ -162,6 +170,18 @@
 		</div>
 	</div>
 	
+	<!-- Submit success/error placeholders  -->
+	<div id="fly-editor_placeholders">
+    	<span class="btn navbar-btn btn-success fly-editor_success_placeholder hidden">
+    		<span class="glyphicon glyphicon-ok"></span>
+    		<span class="fly-editor_message"></span>
+    	</button>
+        <span class="btn navbar-btn btn-danger fly-editor_error_placeholder hidden">
+        	<span class="glyphicon glyphicon-exclamation-sign"></span>
+        	<span class="fly-editor_message"></span>
+        </button>
+	</div>
+	
 	<!-- Logout form -->
 	<div class="modal fade fly-editor_dialog-container " id="sitarium_logout_modal" tabindex="-1" role="dialog">
 		<div class="modal-dialog">
@@ -205,6 +225,42 @@
 			
 			$('#sitarium_open_file_button').click(function() {
 				$('#sitarium_open_file_modal').modal();
+			});
+
+			$('#sitarium_save_file_button').click(function() {
+				var $button = $(this);
+
+				var flyeditor_callback = function(result) {
+					var $placeholder;
+					if (result.code == 0) {
+						$placeholder = $('#fly-editor_placeholders .fly-editor_success_placeholder').clone();
+					}
+					else {
+						$placeholder = $('#fly-editor_placeholders .fly-editor_error_placeholder').clone();
+					}
+					$placeholder.hide().removeClass('hidden').find('.fly-editor_message').html(result.message);
+					$button.after($placeholder);
+					$placeholder.css('opacity', 0).animate(
+						{ opacity: 1, width: 'toggle' },
+						{ queue: false }
+					);
+
+					var flyeditor_delay = 2000;
+					setTimeout(function() {
+						$placeholder.animate(
+							{ opacity: 0, width:'hide' },
+							{ complete: function() { $placeholder.remove(); } }
+						);
+						
+				    }, flyeditor_delay);
+				};
+				
+				$flyeditor.submit({
+					callbacks: {
+						success: flyeditor_callback,
+						error: flyeditor_callback
+					}
+				});
 			});
 			
 			$('#sitarium_logout_button').click(function() {

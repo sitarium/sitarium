@@ -35,7 +35,7 @@
 								<span class="ajax-form_message"></span>
                             </label>
                             <label class="btn btn-danger disabled ajax-form_error_placeholder">
-								<span class="glyphicon glyphicon-ok"></span>
+								<span class="glyphicon glyphicon-exclamation-sign"></span>
 								<span class="ajax-form_message"></span>
                             </label>
                             <label class="btn btn-default" data-active-class="btn-danger" data-inactive-class="btn-default">

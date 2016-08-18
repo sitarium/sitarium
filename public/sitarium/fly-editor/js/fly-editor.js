@@ -178,7 +178,7 @@
 		if ($ref.is('img'))
 		{
 			$frame.append(
-					'	<div id="dropzone_' + id + '" class="dropzone" data-width="' + $ref.width() + '" data-height="' + $ref.height() + '" data-image="' + $ref.attr("src") + '" data-resize="true" data-url="sitarium/image_upload" style="width: 100%;">' +
+					'	<div id="dropzone_' + id + '" class="dropzone" data-width="' + $ref.width() + '" data-height="' + $ref.height() + '" data-image="' + $ref.attr("src") + '" data-resize="true" data-url="/fly-editor/image_upload" style="width: 100%;">' +
 					'		<input type="file" name="thumb" />' +
 					'	</div>'
 			);
@@ -567,7 +567,7 @@
 		return this;
 	};
 	
-	FlyEditor.prototype.submit = function(callback)
+	FlyEditor.prototype.submit = function(options)
 	{
 		var myFlyEditor = this;
 		
@@ -586,28 +586,40 @@
 		};
 		$.ajax({
 			type: "post",
-			url: 'sitarium/site_submit',
+			url: '/fly-editor/submit',
 			data: submission,
 			dataType: "json",
 			timeout: 5000,
-			success: function(result)
+		})
+		.done(function(result, status, jqXHR)
+		{
+			if (typeof result.code !== 'undefined' && result.code === 0)
 			{
 				$content.find('.fly-editor_frame').remove();
 				myFlyEditor.make_editable();
 				
-				if(typeof callback === "function") {
-					callback(result);
+				if($.isFunction(options.callbacks.success)) {
+					options.callbacks.success(result);
 				}
-			},
-	        error: function(request, status, err)
-	        {
-	    		if(typeof callback === "function") {
-	    			callback({
-	    				code: status,
-	    				message: err
+			}
+			else
+			{
+				if($.isFunction(options.callbacks.error)) {
+	    			options.callbacks.error({
+	    				code: -1,
+	    				message: result.message !== 'undefined' ? result.message : 'Unexpected error'
 	    			});
 	    		}
-	        }
+			}
+		})
+		.fail(function(jqXHR, status, errorThrown)
+		{
+			if($.isFunction(options.callbacks.error)) {
+    			options.callbacks.error({
+    				code: status,
+    				message: errorThrown
+    			});
+    		}
 		});
 		
 		$clone = null;

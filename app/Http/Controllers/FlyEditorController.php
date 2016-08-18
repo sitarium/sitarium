@@ -3,21 +3,20 @@
 namespace App\Http\Controllers;
 
 use App;
-use App\Models\User;
+use App\Models\Website;
 use Auth;
-use Hash;
 use Input;
 use Request;
 use Response;
 use Wa72\HtmlPageDom\HtmlPageCrawler;
 
-class UpdateController extends Controller
+class FlyEditorController extends Controller
 {
     public function submit()
     {
         $this->middleware('auth');
 
-        $site = Site::where([
+        $site = Website::where([
             'host' => Request::server('HTTP_HOST'),
             'active' => true,
         ])->first();
@@ -59,12 +58,12 @@ class UpdateController extends Controller
     {
         $this->middleware('auth');
 
-        $site = Site::where([
+        $website = Website::where([
             'host' => Request::server('HTTP_HOST'),
             'active' => true,
         ])->first();
 
-        if ($site != null && $site->existsOnDisk()) {
+        if ($website != null && $website->existsOnDisk()) {
             $tmp_data = explode(',', Input::get('data'));
             $img_data = base64_decode($tmp_data[1]);
 
@@ -72,7 +71,7 @@ class UpdateController extends Controller
             $extension = strtolower(end($tmp_name));
             $filename = substr(Input::get('name'), 0, -(strlen($extension) + 1)).'.'.substr(sha1(time()), 0, 6).'.'.$extension;
 
-            $site->saveImage($filename, $img_data);
+            $website->saveImage($filename, $img_data);
 
             return Response::json([
                 'status' => 'success',
@@ -85,11 +84,12 @@ class UpdateController extends Controller
         }
     }
 
+    /*
     public function create_backup()
     {
         $this->middleware('auth');
 
-        $site = Site::where([
+        $site = Website::where([
             'host' => Request::server('HTTP_HOST'),
             'active' => true,
         ])->first();
@@ -131,7 +131,7 @@ class UpdateController extends Controller
     {
         $this->middleware('auth');
 
-        $site = Site::where([
+        $site = Website::where([
             'host' => Request::server('HTTP_HOST'),
             'active' => true,
         ])->first();
@@ -162,7 +162,7 @@ class UpdateController extends Controller
     {
         $this->middleware('auth');
 
-        $site = Site::where([
+        $site = Website::where([
             'host' => Request::server('HTTP_HOST'),
             'active' => true,
         ])->first();
@@ -209,9 +209,9 @@ class UpdateController extends Controller
             if ($user == null) {
                 echo 'User not found';
             } else {
-                $site = Site::where('name', Input::get('site'))->orWhere('host', Input::get('host'))->first();
+                $site = Website::where('name', Input::get('site'))->orWhere('host', Input::get('host'))->first();
                 if ($site == null) {
-                    echo 'Site not found';
+                    echo 'Website not found';
                 } else {
                     $user->sites()->attach($site);
                     echo 'Done.';
@@ -221,4 +221,5 @@ class UpdateController extends Controller
             App::abort(404);
         }
     }
+    */
 }

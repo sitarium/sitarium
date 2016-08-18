@@ -57,6 +57,10 @@ Route::get('/{page?}', 'DisplayController@show');
 Route::post('/sitarium/login', 'Auth\AuthController@login');
 Route::get('/sitarium/logout', 'Auth\AuthController@logout');
 
+// Routes for websites updates
+Route::post('/fly-editor/submit', 'FlyEditorController@submit');
+Route::post('/fly-editor/image_upload', 'FlyEditorController@image_upload');
+
 
 
 
