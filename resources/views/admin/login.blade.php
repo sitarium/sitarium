@@ -10,10 +10,10 @@
                             {{ csrf_field() }}
     
                             <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
-                                <label class="col-md-4 control-label">E-Mail Address</label>
+                                <label for="email" class="col-md-4 control-label">E-Mail Address</label>
     
                                 <div class="col-md-6">
-                                    <input type="email" class="form-control" name="email" value="{{ old('email') }}">
+                                    <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" required autofocus>
     
                                     @if ($errors->has('email'))
                                         <span class="help-block">
@@ -24,10 +24,10 @@
                             </div>
     
                             <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
-                                <label class="col-md-4 control-label">Password</label>
+                                <label for="password" class="col-md-4 control-label">Password</label>
     
                                 <div class="col-md-6">
-                                    <input type="password" class="form-control" name="password">
+                                    <input id="password" type="password" class="form-control" name="password" required>
     
                                     @if ($errors->has('password'))
                                         <span class="help-block">
@@ -76,11 +76,11 @@
 				callbacks: {
 					success: function(myAjaxForm, callback_vars) {
 						var redirect_url = '/admin';
-						if (callback_vars !== 'undefined' && callback_vars.redirect_url !== 'undefined')
+						if (callback_vars !== undefined && callback_vars.redirect_url !== undefined)
 						{
 							redirect_url = callback_vars.redirect_url;
 						}
-						setTimeout('window.location.replace("' + callback_vars.redirect_url + '")', 2000);
+						setTimeout('window.location.replace("' + redirect_url + '")', 2000);
 					}
 				}
 			});

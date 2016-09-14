@@ -55,7 +55,10 @@ return [
     |
     */
 
-    'from' => ['address' => null, 'name' => null],
+    'from' => [
+        'address' => 'email@sitarium.fr',
+        'name' => 'Sitarium',
+    ],
 
     /*
     |--------------------------------------------------------------------------
