@@ -10,8 +10,8 @@ use Validator;
 class WebsiteFormRequest extends FormRequest
 {
     /**
-     * Defines the rules through a factory (required to check host unicity)
-     * 
+     * Defines the rules through a factory (required to check host unicity).
+     *
      * @param mixed $factory
      * @return bool
      */
@@ -26,7 +26,7 @@ class WebsiteFormRequest extends FormRequest
             ], $this->messages(), $this->attributes()
         );
     }
-    
+
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -39,8 +39,8 @@ class WebsiteFormRequest extends FormRequest
     }
 
     /**
-     * Returns a specific json response
-     * 
+     * Returns a specific json response.
+     *
      * @param  array  $errors
      * @return \Symfony\Component\HttpFoundation\Response
      */
