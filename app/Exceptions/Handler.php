@@ -53,7 +53,7 @@ class Handler extends ExceptionHandler
                 'errors' => $exception->getResponse()->getData(),
             ]);
         }
-        
+
         return parent::render($request, $exception);
     }
 

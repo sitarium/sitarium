@@ -60,4 +60,3 @@ Route::group(['domain' => env('SITARIUM_ADMIN_WEBSITE')], function () {
     // Routes for websites updates
     Route::post('/fly-editor/submit', 'FlyEditorController@submit');
     Route::post('/fly-editor/image_upload', 'FlyEditorController@image_upload');
-
