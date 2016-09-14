@@ -44,7 +44,7 @@ class AdminController extends Controller
 
         if ($user != null) {
             $websites->map(function ($website, $key) use ($user) {
-                $website->authorized = $website->users->contains(function ($key, $value) use ($user) {
+                $website->authorized = $website->users->contains(function ($value, $key) use ($user) {
                     return $value->id == intval($user);
                 });
 
@@ -130,7 +130,7 @@ class AdminController extends Controller
 
         if ($website != null) {
             $users->map(function ($user, $key) use ($website) {
-                $user->authorized = $user->websites->contains(function ($key, $value) use ($website) {
+                $user->authorized = $user->websites->contains(function ($value, $key) use ($website) {
                     return $value->id == intval($website);
                 });
 

@@ -201,7 +201,11 @@
 				
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
-					<a href="/sitarium/logout" class="btn btn-danger" type="submit">Oui, c'est bon pour moi.</a>
+					<a href="{{ url('/sitarium/logout') }}" class="btn btn-danger" type="submit" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Oui, c'est bon pour moi.</a>
+
+                    <form id="logout-form" action="{{ url('/sitarium/logout') }}" method="POST" style="display: none;">
+                        {{ csrf_field() }}
+                    </form>
 				</div>
 			</div>
 		</div>

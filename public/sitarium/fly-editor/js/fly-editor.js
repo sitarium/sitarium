@@ -517,7 +517,7 @@
 						{
 							var $this = $(this);
 							var offset = $this.offset();
-							$frame = $("#fly-editor_frame_" + id);
+							var $frame = $("#fly-editor_frame_" + id);
 							
 							// Resize the frame
 							myFlyEditor.resize_all_frames(false);
