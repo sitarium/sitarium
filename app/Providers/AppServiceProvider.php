@@ -36,12 +36,12 @@ class AppServiceProvider extends ServiceProvider
 
         // Button Switch
         Asset::container('button-switch')->add('button-switch', 'sitarium/jungle-gecko/button-switch/js/button-switch.js');
-        
-        // JSTree 
+
+        // JSTree
         Asset::container('jstree')->add('jstree', 'sitarium/vakata/jstree/dist/jstree.min.js');
         Asset::container('jstree')->add('jstree', 'sitarium/vakata/jstree/dist/themes/default/style.min.css');
         Asset::container('jstree')->add('jstree-admin', 'sitarium/admin/jstree/jstree.css');
-        
+
         // Admin
         Asset::container('admin')->add('admin', 'sitarium/admin/css/admin.css');
 

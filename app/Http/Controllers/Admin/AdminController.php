@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Auth;
-use Response;
 use View;
 
 class AdminController extends Controller

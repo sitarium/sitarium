@@ -54,28 +54,28 @@ class WebsiteController extends Controller
         $website = Website::findOrNew($id);
         $operation = Request::input('operation');
 
-        if(!isset($operation)) {
+        if (! isset($operation)) {
             return view('admin.websites.browse')->with(compact('website'));
         } else {
             $id = Request::input('id');
             $parent = Request::input('parent');
             $text = Request::input('text');
 
-            if(isset($operation)) {
+            if (isset($operation)) {
                 $fs = new Fs($website->pathOnDisk());
                 $rslt = null;
-                switch($operation) {
+                switch ($operation) {
                     case 'get_node':
                         $node = isset($id) && $id !== '#' ? $id : '/';
                         $rslt = $fs->lst($node, (isset($id) && $id === '#'));
                         break;
-                    case "get_content":
+                    case 'get_content':
                         $node = isset($id) && $id !== '#' ? $id : '/';
                         $rslt = $fs->data($node);
                         break;
                     case 'create_node':
                         $node = isset($id) && $id !== '#' ? $id : '/';
-                        $rslt = $fs->create($node, isset($text) ? $text : '', (!isset($type) || $type !== 'file'));
+                        $rslt = $fs->create($node, isset($text) ? $text : '', (! isset($type) || $type !== 'file'));
                         break;
                     case 'rename_node':
                         $node = isset($id) && $id !== '#' ? $id : '/';
@@ -87,25 +87,26 @@ class WebsiteController extends Controller
                         break;
                     case 'move_node':
                         $node = isset($id) && $id !== '#' ? $id : '/';
-                        $parn = isset($parent) && $parent!== '#' ? $parent: '/';
+                        $parn = isset($parent) && $parent !== '#' ? $parent : '/';
                         $rslt = $fs->move($node, $parn);
                         break;
                     case 'copy_node':
                         $node = isset($id) && $id !== '#' ? $id : '/';
-                        $parn = isset($parent) && $parent!== '#' ? $parent: '/';
+                        $parn = isset($parent) && $parent !== '#' ? $parent : '/';
                         $rslt = $fs->copy($node, $parn);
                         break;
                     default:
-                        throw new Exception('Unsupported operation: ' . $operation);
+                        throw new Exception('Unsupported operation: '.$operation);
                         break;
                 }
+
                 return Response::json($rslt);
             }
         }
     }
-    
+
     /**
-     * Functions for JSTree
+     * Functions for JSTree.
      */
     public function fs($id = null)
     {
@@ -113,22 +114,22 @@ class WebsiteController extends Controller
         $id = Request::input('id');
         $parent = Request::input('parent');
         $text = Request::input('text');
-        
-        if(isset($operation)) {
-            $fs = new Fs(dirname(__FILE__) . DIRECTORY_SEPARATOR . 'data' . DIRECTORY_SEPARATOR . 'root' . DIRECTORY_SEPARATOR);
+
+        if (isset($operation)) {
+            $fs = new Fs(dirname(__FILE__).DIRECTORY_SEPARATOR.'data'.DIRECTORY_SEPARATOR.'root'.DIRECTORY_SEPARATOR);
             $rslt = null;
-            switch($operation) {
+            switch ($operation) {
                 case 'get_node':
                     $node = isset($id) && $id !== '#' ? $id : '/';
                     $rslt = $fs->lst($node, (isset($id) && $id === '#'));
                     break;
-                case "get_content":
+                case 'get_content':
                     $node = isset($id) && $id !== '#' ? $id : '/';
                     $rslt = $fs->data($node);
                     break;
                 case 'create_node':
                     $node = isset($id) && $id !== '#' ? $id : '/';
-                    $rslt = $fs->create($node, isset($text) ? $text : '', (!isset($type) || $type !== 'file'));
+                    $rslt = $fs->create($node, isset($text) ? $text : '', (! isset($type) || $type !== 'file'));
                     break;
                 case 'rename_node':
                     $node = isset($id) && $id !== '#' ? $id : '/';
@@ -140,18 +141,19 @@ class WebsiteController extends Controller
                     break;
                 case 'move_node':
                     $node = isset($id) && $id !== '#' ? $id : '/';
-                    $parn = isset($parent) && $parent!== '#' ? $parent: '/';
+                    $parn = isset($parent) && $parent !== '#' ? $parent : '/';
                     $rslt = $fs->move($node, $parn);
                     break;
                 case 'copy_node':
                     $node = isset($id) && $id !== '#' ? $id : '/';
-                    $parn = isset($parent) && $parent!== '#' ? $parent: '/';
+                    $parn = isset($parent) && $parent !== '#' ? $parent : '/';
                     $rslt = $fs->copy($node, $parn);
                     break;
                 default:
-                    throw new Exception('Unsupported operation: ' . $operation);
+                    throw new Exception('Unsupported operation: '.$operation);
                     break;
             }
+
             return Response::json($rslt);
         }
     }
@@ -240,5 +242,4 @@ class WebsiteController extends Controller
             'message' => 'Saved.',
         ]);
     }
-    
 }
