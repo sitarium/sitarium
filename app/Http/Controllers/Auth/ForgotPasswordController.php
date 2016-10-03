@@ -9,7 +9,6 @@ use Request;
 use Password;
 use Response;
 
-
 class ForgotPasswordController extends Controller
 {
     /*
@@ -34,7 +33,7 @@ class ForgotPasswordController extends Controller
     {
         //$this->middleware('guest');
     }
-    
+
     /**
      * Display the form to request a password reset link.
      *
@@ -46,7 +45,7 @@ class ForgotPasswordController extends Controller
         if (Auth::check()) {
             $email = Auth::user()->email;
         }
-        
+
         return view('admin.passwords.email')->with(compact('email'));
     }
 

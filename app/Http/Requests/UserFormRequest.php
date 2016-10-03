@@ -10,8 +10,8 @@ use Validator;
 class UserFormRequest extends FormRequest
 {
     /**
-     * Defines the rules through a factory (required to check email unicity)
-     * 
+     * Defines the rules through a factory (required to check email unicity).
+     *
      * @param mixed $factory
      * @return bool
      */
@@ -25,7 +25,7 @@ class UserFormRequest extends FormRequest
             ], $this->messages(), $this->attributes()
         );
     }
-    
+
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -38,7 +38,7 @@ class UserFormRequest extends FormRequest
     }
 
     /**
-     * Returns a specific json response
+     * Returns a specific json response.
      *
      * @param  array  $errors
      * @return \Symfony\Component\HttpFoundation\Response
