@@ -32,22 +32,22 @@ Route::group(['domain' => env('SITARIUM_ADMIN_WEBSITE')], function () {
     Route::get('/', 'HomeController@index');
 
     // Admin page
-    Route::get('/admin', 'AdminController@index');
+    Route::get('/admin', 'Admin\AdminController@index');
 
     // Websites
-    Route::get('/admin/websites/{user?}', 'AdminController@paginateWebsites');
-    Route::get('/admin/website/{id?}', 'AdminController@showWebsiteForm');
-    Route::post('/admin/website', 'AdminController@saveWebsite');
-    Route::delete('/admin/website', 'AdminController@deleteWebsite');
+    Route::get('/admin/websites/{user?}', 'Admin\WebsiteController@paginate');
+    Route::get('/admin/website/{id?}', 'Admin\WebsiteController@showForm');
+    Route::get('/admin/website/browse/{id?}', 'Admin\WebsiteController@browse');
+    Route::get('/admin/website/fs/{id?}', 'Admin\WebsiteController@fs');
+    Route::post('/admin/website', 'Admin\WebsiteController@save');
+    Route::delete('/admin/website', 'Admin\WebsiteController@delete');
+    Route::post('/admin/website/authorize', 'Admin\AdminController@authorizeUser');
 
     // Users
-    Route::get('/admin/users/{website?}', 'AdminController@paginateUsers');
-    Route::get('/admin/user/{id?}', 'AdminController@showUserForm');
-    Route::post('/admin/user', 'AdminController@saveUser');
-    Route::delete('/admin/user', 'AdminController@deleteUser');
-
-    // Authorizations
-    Route::post('/admin/authorize', 'AdminController@authorizeUserWebsite');
+    Route::get('/admin/users/{website?}', 'Admin\UserController@paginate');
+    Route::get('/admin/user/{id?}', 'Admin\UserController@showForm');
+    Route::post('/admin/user', 'Admin\UserController@save');
+    Route::delete('/admin/user', 'Admin\UserController@delete');
 });
 
     // Route for hosted websites

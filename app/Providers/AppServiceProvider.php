@@ -16,10 +16,11 @@ class AppServiceProvider extends ServiceProvider
     {
         //
         $this->publishes([
-            base_path('vendor/components/jquery')       => base_path('public/sitarium/jquery'),
-            base_path('vendor/components/bootstrap')    => base_path('public/sitarium/bootstrap'),
-            base_path('vendor/jungle-gecko/ajax-form')  => base_path('public/sitarium/jungle-gecko/ajax-form'),
+            base_path('vendor/components/jquery')           => base_path('public/sitarium/jquery'),
+            base_path('vendor/components/bootstrap')        => base_path('public/sitarium/bootstrap'),
+            base_path('vendor/jungle-gecko/ajax-form')      => base_path('public/sitarium/jungle-gecko/ajax-form'),
             base_path('vendor/jungle-gecko/button-switch')  => base_path('public/sitarium/jungle-gecko/button-switch'),
+            base_path('vendor/vakata/jstree')               => base_path('public/sitarium/vakata/jstree'),
         ], 'assets');
 
         // Jquery
@@ -35,7 +36,12 @@ class AppServiceProvider extends ServiceProvider
 
         // Button Switch
         Asset::container('button-switch')->add('button-switch', 'sitarium/jungle-gecko/button-switch/js/button-switch.js');
-
+        
+        // JSTree 
+        Asset::container('jstree')->add('jstree', 'sitarium/vakata/jstree/dist/jstree.min.js');
+        Asset::container('jstree')->add('jstree', 'sitarium/vakata/jstree/dist/themes/default/style.min.css');
+        Asset::container('jstree')->add('jstree-admin', 'sitarium/admin/jstree/jstree.css');
+        
         // Admin
         Asset::container('admin')->add('admin', 'sitarium/admin/css/admin.css');
 

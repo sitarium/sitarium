@@ -55,9 +55,14 @@ class Website extends Model
     /*
      * Functions linked to files
      */
+    public function pathOnDisk()
+    {
+        return $this->websites_folder.'/'.$this->host;
+    }
+
     public function existsOnDisk()
     {
-        return is_dir($this->websites_folder.'/'.$this->host);
+        return is_dir($this->pathOnDisk());
     }
 
     public function getPagePath($requested_page)

@@ -5,8 +5,9 @@
     			<th class="col-md-1">Id</th>
     			<th class="col-md-2">Name</th>
     			<th class="col-md-2">Host</th>
-    			<th class="col-md-3">Email</th>
+    			<th class="col-md-2">Email</th>
     			<th class="col-md-1">Active</th>
+    			<th class="col-md-1">Browse</th>
 		@if (isset($user) && $user != null)
 				<th class="col-md-3">Authorized</th>
 		@endif
@@ -18,9 +19,10 @@
 				<td><a href="{{ url('/admin/website', $website->id) }}">{{ $website->host }}</a></td>
 				<td>{{ $website->email }}</td>
 				<td>{{ $website->active ? 'Yes' : 'No' }}</td>
+				<td><a class="btn btn-sm btn-primary" href="{{ url('/admin/website/browse/' . $website->id) }}">Browse</a></td>
 	@if (isset($user) && $user != null)
 				<td>
-    				{!! Form::open(['url' => '/admin/authorize', 'class' => 'authorize_form form-horizontal', 'role' => 'form']) !!}
+    				{!! Form::open(['url' => '/admin/website/authorize', 'class' => 'authorize_form form-horizontal', 'role' => 'form']) !!}
     				
     					{!! Form::hidden('websiteId', $website->id) !!}
     					

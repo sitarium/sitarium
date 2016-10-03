@@ -18,7 +18,7 @@
 				<td>{{ $user->admin ? 'Yes' : 'No' }}</td>
 	@if (isset($website) && $website != null)
 				<td>
-    				{!! Form::open(['url' => '/admin/authorize', 'class' => 'authorize_form form-horizontal', 'role' => 'form']) !!}
+    				{!! Form::open(['url' => '/admin/website/authorize', 'class' => 'authorize_form form-horizontal', 'role' => 'form']) !!}
     				
     					{!! Form::hidden('userId', $user->id) !!}
     					
